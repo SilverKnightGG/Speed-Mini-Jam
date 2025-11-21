@@ -18,7 +18,6 @@ func _process(delta):
 			move_velocity = Vector2.ZERO
 		MovementArea.State.MOVING:
 			vector_pressed = Input.get_vector("LEFT", "RIGHT", "UP", "DOWN").round() # always needs 1.0 or 0.0 value in each component
-			prints("input vector_pressed =", str(vector_pressed))
 			if not vector_pressed.x == 0.0:
 				flip.emit(Vector2(vector_pressed.x / abs(vector_pressed.x), 1.0))
 

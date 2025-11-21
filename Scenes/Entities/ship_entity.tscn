@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://uh16to4u3v10"]
 
-[ext_resource type="Script" uid="uid://d4ia61qi0cbin" path="res://Scenes/Entitiesobject.gd" id="1_5jyb3"]
+[ext_resource type="Script" uid="uid://byna0dlam2tsv" path="res://Scenes/Entities/ship_entity.gd" id="1_5cpm7"]
 [ext_resource type="Script" uid="uid://bwhdiepo5jj0u" path="res://Scenes/Entities/simple_physics_area.gd" id="2_buhsh"]
 [ext_resource type="Texture2D" uid="uid://ejf7qeub7usi" path="res://Assets/Graphics/Textures/Galleon.png" id="3_rif75"]
 [ext_resource type="Script" uid="uid://tnuibtauyqsa" path="res://Scenes/Entities/input_movement.gd" id="4_buhsh"]
@@ -9,8 +9,8 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_eju28"]
 radius = 24.0
 
-[node name="Entity" type="Node2D"]
-script = ExtResource("1_5jyb3")
+[node name="ShipEntity" type="Node2D"]
+script = ExtResource("1_5cpm7")
 
 [node name="Mover" type="Area2D" parent="."]
 unique_name_in_owner = true
