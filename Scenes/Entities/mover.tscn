@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3anmeg7acnhe"]
+
+[ext_resource type="Script" uid="uid://bwhdiepo5jj0u" path="res://Scenes/Entities/simple_physics_area.gd" id="1_1jsrx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eju28"]
+
+[node name="Mover" type="Area2D"]
+script = ExtResource("1_1jsrx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_eju28")

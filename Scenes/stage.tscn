@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://ctwu80l76nigy"]
+
+[ext_resource type="Texture2D" uid="uid://c2uboyvk0kfro" path="res://Assets/Graphics/Textures/wood_tileable_bg.png" id="1_84iix"]
+[ext_resource type="PackedScene" uid="uid://uh16to4u3v10" path="res://Scenes/Entities/entity.tscn" id="2_plxqo"]
+
+[node name="Stage" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -1310.0
+offset_top = -843.0
+offset_right = 1290.0
+offset_bottom = 759.0
+texture = ExtResource("1_84iix")
+stretch_mode = 1
+
+[node name="Entity" parent="." instance=ExtResource("2_plxqo")]
