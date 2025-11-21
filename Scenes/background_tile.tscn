@@ -1,14 +1,35 @@
-[gd_scene load_steps=3 format=3 uid="uid://bk81lotiib3gk"]
+[gd_scene load_steps=5 format=3 uid="uid://be6g8bg1i1w5a"]
 
-[sub_resource type="Gradient" id="Gradient_84iix"]
-offsets = PackedFloat32Array(0, 0.2, 0.8, 1)
+[ext_resource type="Script" uid="uid://bqm8slv8tunyk" path="res://Scenes/shunt_barrier.gd" id="1_vkslf"]
+
+[sub_resource type="Gradient" id="Gradient_plxqo"]
+offsets = PackedFloat32Array(0.2, 0.35, 0.65, 0.8)
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0.142857, 0, 0, 0, 0.142857, 0, 0, 0, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_plxqo"]
-gradient = SubResource("Gradient_84iix")
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_70rqm"]
+gradient = SubResource("Gradient_plxqo")
 width = 1024
 height = 4096
 fill_from = Vector2(1, 1)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vuyue"]
+size = Vector2(1024, 512)
+
 [node name="Background" type="Sprite2D"]
-texture = SubResource("GradientTexture2D_plxqo")
+z_index = -1
+texture = SubResource("GradientTexture2D_70rqm")
+
+[node name="TopBound" type="Area2D" parent="."]
+script = ExtResource("1_vkslf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopBound"]
+unique_name_in_owner = true
+position = Vector2(0, -1792)
+shape = SubResource("RectangleShape2D_vuyue")
+
+[node name="BottomBound" type="Area2D" parent="."]
+script = ExtResource("1_vkslf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomBound"]
+position = Vector2(0, 1792)
+shape = SubResource("RectangleShape2D_vuyue")

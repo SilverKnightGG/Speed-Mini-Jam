@@ -26,7 +26,7 @@ const FORCE_VALUE_DEFAULTS = {
 ## Class for tracking shunt source data so it doesn't have to be re-calculated per-frame.
 class ShuntSourceProfile:
 	var area: MovementArea
-	var combined_radii: float
+	var shunt_power: float
 
 class ExternalForce:
 	var type: Force
@@ -159,12 +159,12 @@ func _calculate_shunt(delta) -> Vector2:
 		
 		var direction: Vector2 = global_position - source.area.global_position
 		var distance: float = direction.length()
-		var combined_radii: float = source.combined_radii
-		var overlap: float = combined_radii - distance
+		var shunt_power: float = source.shunt_power
+		var overlap: float = shunt_power - distance
 		if overlap <= 0.0:
 			continue
 		
-		var time_factor: float = overlap / combined_radii
+		var time_factor: float = overlap / shunt_power
 		var curve_index: int = floori(time_factor * (WEIGHT_FACTOR_CURVE.size() - 1))
 		var distance_factor: float = WEIGHT_FACTOR_CURVE[curve_index]
 		
@@ -226,12 +226,16 @@ func _on_receive_new_trajectory(new_trajectory: Vector2, force_changes: Dictiona
 	target_node2d = null
 
 
+func get_shunt_power(shunting_mover: MovementArea) -> float:
+	return collision_shape.shape.radius + shunting_mover.collision_shape.shape.radius
+
+
 func _add_shunt_source(area: MovementArea):
 	if not area.tree_exiting.is_connected(_on_area_tree_exiting):
 		area.tree_exiting.connect(_on_area_tree_exiting)
 	var profile := ShuntSourceProfile.new()
 	profile.area = area
-	profile.combined_radii = collision_shape.shape.radius + area.collision_shape.shape.radius
+	profile.shunt_power = get_shunt_power(area)
 	stored_shunt_sources[area.get_instance_id()] = profile
 
 

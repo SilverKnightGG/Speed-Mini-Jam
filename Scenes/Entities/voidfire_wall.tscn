@@ -1,5 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://dyhp3dmdx13gm"]
+[gd_scene load_steps=16 format=3 uid="uid://dyhp3dmdx13gm"]
 
+[ext_resource type="Script" uid="uid://krc1wfiyuj5c" path="res://Scenes/Entities/voidfire_wall.gd" id="1_8pqaa"]
 [ext_resource type="Shader" uid="uid://rgquvxrnw4yd" path="res://Assets/Graphics/Shaders/voidfire.gdshader" id="1_byugd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f07vx"]
@@ -63,46 +64,209 @@ gradient = SubResource("Gradient_1dsdh")
 width = 512
 height = 512
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_byugd"]
+size = Vector2(1295, 4667)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8pqaa"]
+size = Vector2(680, 4667)
+
 [node name="VoidfireWall" type="Area2D"]
-position = Vector2(603, -199)
+script = ExtResource("1_8pqaa")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_f07vx")
 
-[node name="Frontfire" type="Sprite2D" parent="."]
+[node name="Effects" type="Node2D" parent="."]
+
+[node name="Frontfire" type="Sprite2D" parent="Effects"]
 material = SubResource("ShaderMaterial_rmlyo")
 position = Vector2(4, 274)
 texture = SubResource("GradientTexture2D_4i58m")
+offset = Vector2(-929, -531)
 
-[node name="Sprite2D" type="Sprite2D" parent="Frontfire"]
+[node name="Sprite2D" type="Sprite2D" parent="Effects/Frontfire"]
 z_index = -1
 texture = SubResource("GradientTexture2D_8pqaa")
+offset = Vector2(-929, -531)
 
-[node name="Frontfire2" type="Sprite2D" parent="."]
+[node name="Frontfire2" type="Sprite2D" parent="Effects"]
 material = SubResource("ShaderMaterial_rmlyo")
 position = Vector2(4, 786)
 texture = SubResource("GradientTexture2D_4i58m")
+offset = Vector2(-929, -531)
 
-[node name="Sprite2D" type="Sprite2D" parent="Frontfire2"]
+[node name="Sprite2D" type="Sprite2D" parent="Effects/Frontfire2"]
 z_index = -1
 texture = SubResource("GradientTexture2D_8pqaa")
+offset = Vector2(-929, -531)
 
-[node name="Backfire" type="Sprite2D" parent="."]
+[node name="Frontfire3" type="Sprite2D" parent="Effects"]
+material = SubResource("ShaderMaterial_rmlyo")
+position = Vector2(4, 1298)
+texture = SubResource("GradientTexture2D_4i58m")
+offset = Vector2(-929, -531)
+
+[node name="Sprite2D" type="Sprite2D" parent="Effects/Frontfire3"]
+z_index = -1
+texture = SubResource("GradientTexture2D_8pqaa")
+offset = Vector2(-929, -531)
+
+[node name="Frontfire6" type="Sprite2D" parent="Effects"]
+material = SubResource("ShaderMaterial_rmlyo")
+position = Vector2(4, 1810)
+texture = SubResource("GradientTexture2D_4i58m")
+offset = Vector2(-929, -531)
+
+[node name="Sprite2D" type="Sprite2D" parent="Effects/Frontfire6"]
+z_index = -1
+texture = SubResource("GradientTexture2D_8pqaa")
+offset = Vector2(-929, -531)
+
+[node name="Frontfire8" type="Sprite2D" parent="Effects"]
+material = SubResource("ShaderMaterial_rmlyo")
+position = Vector2(4, 2322)
+texture = SubResource("GradientTexture2D_4i58m")
+offset = Vector2(-929, -531)
+
+[node name="Sprite2D" type="Sprite2D" parent="Effects/Frontfire8"]
+z_index = -1
+texture = SubResource("GradientTexture2D_8pqaa")
+offset = Vector2(-929, -531)
+
+[node name="Frontfire4" type="Sprite2D" parent="Effects"]
+material = SubResource("ShaderMaterial_rmlyo")
+position = Vector2(4, -238)
+texture = SubResource("GradientTexture2D_4i58m")
+offset = Vector2(-929, -531)
+
+[node name="Sprite2D" type="Sprite2D" parent="Effects/Frontfire4"]
+z_index = -1
+texture = SubResource("GradientTexture2D_8pqaa")
+offset = Vector2(-929, -531)
+
+[node name="Frontfire5" type="Sprite2D" parent="Effects"]
+material = SubResource("ShaderMaterial_rmlyo")
+position = Vector2(4, -750)
+texture = SubResource("GradientTexture2D_4i58m")
+offset = Vector2(-929, -531)
+
+[node name="Sprite2D" type="Sprite2D" parent="Effects/Frontfire5"]
+z_index = -1
+texture = SubResource("GradientTexture2D_8pqaa")
+offset = Vector2(-929, -531)
+
+[node name="Frontfire7" type="Sprite2D" parent="Effects"]
+material = SubResource("ShaderMaterial_rmlyo")
+position = Vector2(4, -1262)
+texture = SubResource("GradientTexture2D_4i58m")
+offset = Vector2(-929, -531)
+
+[node name="Sprite2D" type="Sprite2D" parent="Effects/Frontfire7"]
+z_index = -1
+texture = SubResource("GradientTexture2D_8pqaa")
+offset = Vector2(-929, -531)
+
+[node name="Backfire" type="Sprite2D" parent="Effects"]
 material = SubResource("ShaderMaterial_01wkl")
 position = Vector2(-508, 274)
 texture = SubResource("GradientTexture2D_4i58m")
+offset = Vector2(-929, -531)
 
-[node name="Sprite2D" type="Sprite2D" parent="Backfire"]
+[node name="Sprite2D" type="Sprite2D" parent="Effects/Backfire"]
 z_index = -1
 texture = SubResource("GradientTexture2D_p67ru")
+offset = Vector2(-929, -531)
 
-[node name="Backfire2" type="Sprite2D" parent="."]
+[node name="Backfire2" type="Sprite2D" parent="Effects"]
 material = SubResource("ShaderMaterial_01wkl")
 position = Vector2(-508, 786)
 texture = SubResource("GradientTexture2D_4i58m")
+offset = Vector2(-929, -531)
 
-[node name="Sprite2D" type="Sprite2D" parent="Backfire2"]
+[node name="Sprite2D" type="Sprite2D" parent="Effects/Backfire2"]
 z_index = -1
 texture = SubResource("GradientTexture2D_p67ru")
+offset = Vector2(-929, -531)
 
-[node name="Tentacles" type="Sprite2D" parent="."]
+[node name="Backfire3" type="Sprite2D" parent="Effects"]
+material = SubResource("ShaderMaterial_01wkl")
+position = Vector2(-508, -238)
+texture = SubResource("GradientTexture2D_4i58m")
+offset = Vector2(-929, -531)
+
+[node name="Sprite2D" type="Sprite2D" parent="Effects/Backfire3"]
+z_index = -1
+texture = SubResource("GradientTexture2D_p67ru")
+offset = Vector2(-929, -531)
+
+[node name="Backfire5" type="Sprite2D" parent="Effects"]
+material = SubResource("ShaderMaterial_01wkl")
+position = Vector2(-508, -750)
+texture = SubResource("GradientTexture2D_4i58m")
+offset = Vector2(-929, -531)
+
+[node name="Sprite2D" type="Sprite2D" parent="Effects/Backfire5"]
+z_index = -1
+texture = SubResource("GradientTexture2D_p67ru")
+offset = Vector2(-929, -531)
+
+[node name="Backfire6" type="Sprite2D" parent="Effects"]
+material = SubResource("ShaderMaterial_01wkl")
+position = Vector2(-508, -1262)
+texture = SubResource("GradientTexture2D_4i58m")
+offset = Vector2(-929, -531)
+
+[node name="Sprite2D" type="Sprite2D" parent="Effects/Backfire6"]
+z_index = -1
+texture = SubResource("GradientTexture2D_p67ru")
+offset = Vector2(-929, -531)
+
+[node name="Backfire4" type="Sprite2D" parent="Effects"]
+material = SubResource("ShaderMaterial_01wkl")
+position = Vector2(-508, 1298)
+texture = SubResource("GradientTexture2D_4i58m")
+offset = Vector2(-929, -531)
+
+[node name="Sprite2D" type="Sprite2D" parent="Effects/Backfire4"]
+z_index = -1
+texture = SubResource("GradientTexture2D_p67ru")
+offset = Vector2(-929, -531)
+
+[node name="Backfire7" type="Sprite2D" parent="Effects"]
+material = SubResource("ShaderMaterial_01wkl")
+position = Vector2(-508, 1810)
+texture = SubResource("GradientTexture2D_4i58m")
+offset = Vector2(-929, -531)
+
+[node name="Sprite2D" type="Sprite2D" parent="Effects/Backfire7"]
+z_index = -1
+texture = SubResource("GradientTexture2D_p67ru")
+offset = Vector2(-929, -531)
+
+[node name="Backfire8" type="Sprite2D" parent="Effects"]
+material = SubResource("ShaderMaterial_01wkl")
+position = Vector2(-508, 2322)
+texture = SubResource("GradientTexture2D_4i58m")
+offset = Vector2(-929, -531)
+
+[node name="Sprite2D" type="Sprite2D" parent="Effects/Backfire8"]
+z_index = -1
+texture = SubResource("GradientTexture2D_p67ru")
+offset = Vector2(-929, -531)
+
+[node name="Tentacles" type="Sprite2D" parent="Effects"]
+
+[node name="WarningArea" type="Area2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-1024, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WarningArea"]
+position = Vector2(-263.5, -14.5)
+shape = SubResource("RectangleShape2D_byugd")
+
+[node name="DeathArea" type="Area2D" parent="."]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DeathArea"]
+position = Vector2(-1595, -14.5)
+shape = SubResource("RectangleShape2D_8pqaa")
