@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://c1wjvqarbgsnt"]
 
-[ext_resource type="Script" uid="uid://d4ia61qi0cbin" path="res://Scenes/Entitiesobject.gd" id="1_1byt0"]
+[ext_resource type="Script" uid="uid://buxuyyfe6c2no" path="res://Scenes/Entities/static_entity.gd" id="1_fbi1e"]
 [ext_resource type="Script" uid="uid://bwhdiepo5jj0u" path="res://Scenes/Entities/simple_physics_area.gd" id="2_pqnxh"]
 [ext_resource type="Script" uid="uid://b74k3hljc2ftk" path="res://Scenes/Entities/moving_nodes.gd" id="4_oi4bo"]
 [ext_resource type="Texture2D" uid="uid://ejf7qeub7usi" path="res://Assets/Graphics/Textures/Galleon.png" id="5_y2md1"]
@@ -9,7 +9,7 @@
 radius = 24.0
 
 [node name="StaticEntity" type="Node2D"]
-script = ExtResource("1_1byt0")
+script = ExtResource("1_fbi1e")
 
 [node name="Mover" type="Area2D" parent="."]
 unique_name_in_owner = true

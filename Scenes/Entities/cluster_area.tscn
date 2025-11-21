@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0ewgji4tp34v"]
+
+[ext_resource type="Script" uid="uid://c1egjq4odq7u7" path="res://cluster_area.gd" id="1_wqgm8"]
+
+[node name="ClusterArea" type="Area2D"]
+editor_description = "DON'T FORGET TO SET A COLLISION SHAPE!!!  IT'S UNSET TO ENCOURAGE BUILDING DIFFERENT CLUSTERS!"
+script = ExtResource("1_wqgm8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
