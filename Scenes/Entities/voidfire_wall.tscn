@@ -1,0 +1,108 @@
+[gd_scene load_steps=13 format=3 uid="uid://dyhp3dmdx13gm"]
+
+[ext_resource type="Shader" uid="uid://rgquvxrnw4yd" path="res://Assets/Graphics/Shaders/voidfire.gdshader" id="1_byugd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f07vx"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1dsdh"]
+noise_type = 2
+frequency = 0.0393
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_p67ru"]
+width = 1536
+height = 1536
+seamless = true
+seamless_blend_skirt = 0.2
+noise = SubResource("FastNoiseLite_1dsdh")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rmlyo"]
+shader = ExtResource("1_byugd")
+shader_parameter/timeScaleFactor = 0.4
+shader_parameter/edge_size = 1.0
+shader_parameter/edge_fade = 0.0001
+shader_parameter/edge_start = 1.0
+shader_parameter/color1 = Color(0.6318, 0.546, 0.78, 1)
+shader_parameter/color2 = Color(0, 0, 0, 1)
+shader_parameter/angle_vector = Vector2(-0.5, 0.5)
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_p67ru")
+
+[sub_resource type="Gradient" id="Gradient_8pqaa"]
+offsets = PackedFloat32Array(0.779221, 0.935065)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4i58m"]
+gradient = SubResource("Gradient_8pqaa")
+width = 512
+height = 512
+
+[sub_resource type="Gradient" id="Gradient_byugd"]
+offsets = PackedFloat32Array(0, 0.376623)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8pqaa"]
+gradient = SubResource("Gradient_byugd")
+width = 512
+height = 512
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_01wkl"]
+shader = ExtResource("1_byugd")
+shader_parameter/timeScaleFactor = 0.4
+shader_parameter/edge_size = 0.0001
+shader_parameter/edge_fade = 0.0001
+shader_parameter/edge_start = 1.0
+shader_parameter/color1 = Color(0.6318, 0.546, 0.78, 1)
+shader_parameter/color2 = Color(0, 0, 0, 1)
+shader_parameter/angle_vector = Vector2(-0.5, 0.5)
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_p67ru")
+
+[sub_resource type="Gradient" id="Gradient_1dsdh"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_p67ru"]
+gradient = SubResource("Gradient_1dsdh")
+width = 512
+height = 512
+
+[node name="VoidfireWall" type="Area2D"]
+position = Vector2(603, -199)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_f07vx")
+
+[node name="Frontfire" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_rmlyo")
+position = Vector2(4, 274)
+texture = SubResource("GradientTexture2D_4i58m")
+
+[node name="Sprite2D" type="Sprite2D" parent="Frontfire"]
+z_index = -1
+texture = SubResource("GradientTexture2D_8pqaa")
+
+[node name="Frontfire2" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_rmlyo")
+position = Vector2(4, 786)
+texture = SubResource("GradientTexture2D_4i58m")
+
+[node name="Sprite2D" type="Sprite2D" parent="Frontfire2"]
+z_index = -1
+texture = SubResource("GradientTexture2D_8pqaa")
+
+[node name="Backfire" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_01wkl")
+position = Vector2(-508, 274)
+texture = SubResource("GradientTexture2D_4i58m")
+
+[node name="Sprite2D" type="Sprite2D" parent="Backfire"]
+z_index = -1
+texture = SubResource("GradientTexture2D_p67ru")
+
+[node name="Backfire2" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_01wkl")
+position = Vector2(-508, 786)
+texture = SubResource("GradientTexture2D_4i58m")
+
+[node name="Sprite2D" type="Sprite2D" parent="Backfire2"]
+z_index = -1
+texture = SubResource("GradientTexture2D_p67ru")
+
+[node name="Tentacles" type="Sprite2D" parent="."]
