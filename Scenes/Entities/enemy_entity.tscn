@@ -37,5 +37,3 @@ script = ExtResource("4_04u4h")
 [node name="MoverSprite" type="Sprite2D" parent="MovingNodes"]
 unique_name_in_owner = true
 texture = ExtResource("5_nmwn6")
-
-[node name="Camera2D" type="Camera2D" parent="MovingNodes"]
