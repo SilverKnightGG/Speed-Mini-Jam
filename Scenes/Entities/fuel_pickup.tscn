@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2ro5xkrlswat"]
+
+[ext_resource type="Script" uid="uid://dfgibm7j2hqga" path="res://Scenes/Entities/fuel_pickup.gd" id="1_kdcoi"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ygau7"]
+
+[node name="FuelPickup" type="Area2D"]
+script = ExtResource("1_kdcoi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ygau7")
+
+[node name="FuelSprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

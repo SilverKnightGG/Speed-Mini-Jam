@@ -1,6 +1,11 @@
 class_name ShipEntity extends Entity
 
 const FREE_THRESHOLD = 0.05
+const COLORS: Dictionary = {
+	Registry.Fuel.ETERNEON: Color.YELLOW,
+	Registry.Fuel.MALNEON: Color.MAGENTA,
+	Registry.Fuel.VOLANTEON: Color.CYAN
+	}
 
 @export var frame_source: AnimatedSprite2D
 @export var scale_source: Node2D
@@ -90,6 +95,11 @@ func _on_stop_drawing_after_images():
 
 func _on_start_drawing_after_images():
 	drawing_after_image = true
+
+
+func _on_fuel_changed(new_fuel: Registry.Fuel):
+	start_color = COLORS[new_fuel]
+	fade_to_color = Color(COLORS[new_fuel], 0.0)
 
 
 func _ready():

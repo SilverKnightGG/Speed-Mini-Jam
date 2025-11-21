@@ -250,9 +250,11 @@ func _on_area_entered(area: Area2D):
 
 
 func _on_area_exited(area: Area2D):
-	if not area is MovementArea: return
+	if area is MovementArea:
+		_remove_shunt_source(area as MovementArea)
+		return
+	# we just know it's a pickup, then
 	
-	_remove_shunt_source(area as MovementArea)
 
 
 func _on_area_tree_exiting(area: Node):
