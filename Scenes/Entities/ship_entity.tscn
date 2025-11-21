@@ -16,8 +16,8 @@ script = ExtResource("1_5cpm7")
 unique_name_in_owner = true
 script = ExtResource("2_buhsh")
 navigation = 1
-max_speed = 100.0
-acceleration = 100.0
+max_speed = 1000.0
+acceleration = 1000.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Mover"]
 unique_name_in_owner = true

@@ -1,7 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://ctwu80l76nigy"]
+[gd_scene load_steps=3 format=3 uid="uid://ctwu80l76nigy"]
 
+[ext_resource type="PackedScene" uid="uid://bk81lotiib3gk" path="res://Scenes/background_tile.tscn" id="2_70rqm"]
 [ext_resource type="PackedScene" uid="uid://uh16to4u3v10" path="res://Scenes/Entities/ship_entity.tscn" id="2_plxqo"]
 
 [node name="Stage" type="Node2D"]
 
-[node name="Entity" parent="." instance=ExtResource("2_plxqo")]
+[node name="Background" parent="." instance=ExtResource("2_70rqm")]
+z_index = -1
+
+[node name="ShipEntity" parent="." instance=ExtResource("2_plxqo")]
