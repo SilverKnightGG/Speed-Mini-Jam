@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://uh16to4u3v10"]
+[gd_scene load_steps=9 format=3 uid="uid://uh16to4u3v10"]
 
 [ext_resource type="Script" uid="uid://byna0dlam2tsv" path="res://Scenes/Entities/ship_entity.gd" id="1_5cpm7"]
 [ext_resource type="Script" uid="uid://bwhdiepo5jj0u" path="res://Scenes/Entities/simple_physics_area.gd" id="2_buhsh"]
@@ -9,8 +9,20 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_eju28"]
 radius = 24.0
 
-[node name="ShipEntity" type="Node2D"]
+[sub_resource type="Gradient" id="Gradient_5cpm7"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.0519481, 0.162338, 0.383117, 0.519481, 0.720779, 0.935065)
+colors = PackedColorArray(0.931552, 0.751742, 0.220603, 1, 0.422145, 0.868124, 0.999784, 1, 0.163815, 0.504447, 0.911079, 1, 0.16705, 0.485013, 0.852948, 1, 0, 0.230633, 0.4757, 1, 0.2964, 0.0546, 0.78, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_byr66"]
+gradient = SubResource("Gradient_5cpm7")
+width = 1024
+height = 768
+fill_from = Vector2(1, 1)
+
+[node name="ShipEntity" type="Node2D" node_paths=PackedStringArray("scale_source")]
 script = ExtResource("1_5cpm7")
+scale_source = NodePath("MovingNodes")
 
 [node name="Mover" type="Area2D" parent="."]
 unique_name_in_owner = true
@@ -33,6 +45,13 @@ script = ExtResource("4_buhsh")
 [node name="MovingNodes" type="Node2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("5_rif75")
+
+[node name="GradientBackground" type="Sprite2D" parent="MovingNodes"]
+self_modulate = Color(0.63, 0.63, 0.63, 1)
+z_index = -2
+position = Vector2(1.49998, 1.50001)
+scale = Vector2(1.27051, 0.923177)
+texture = SubResource("GradientTexture2D_byr66")
 
 [node name="MoverSprite" type="Sprite2D" parent="MovingNodes"]
 unique_name_in_owner = true
