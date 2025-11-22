@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c2hpf5845temy"
-path="res://.godot/imported/Copper Steamback - HD - exploded - pieces - master sprite sheet - all 64x64.png-3fbc32d4c95b37c5a6b917152ee0836e.ctex"
+uid="uid://dxln0654duf5u"
+path="res://.godot/imported/Balloon Ship - HD - exploded - pieces - master sprite sheet 64x64.png-35005045a337e49d60b67a1ffcdd9d59.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Graphics/Exploded Ships Sprite Sheets/Copper Steamback - HD - exploded - pieces - master sprite sheet - all 64x64.png"
-dest_files=["res://.godot/imported/Copper Steamback - HD - exploded - pieces - master sprite sheet - all 64x64.png-3fbc32d4c95b37c5a6b917152ee0836e.ctex"]
+source_file="res://Assets/Graphics/Textures/Exploded Ships Sprite Sheets/Balloon Ship - HD - exploded - pieces - master sprite sheet 64x64.png"
+dest_files=["res://.godot/imported/Balloon Ship - HD - exploded - pieces - master sprite sheet 64x64.png-35005045a337e49d60b67a1ffcdd9d59.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://di1g3kr26utel"
-path="res://.godot/imported/Rocks - spinning - master sprite sheet - 128x128 - Sheet B.png-6ba75dcfbda69bb5676cde3e802159a1.ctex"
+uid="uid://dheyp0sjns5ab"
+path="res://.godot/imported/Rocks - spinning - master sprite sheet - 128x128 - Sheet A.png-44422d44139de2ec6d9bf0c6d416a3aa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Graphics/Rocks Spinning Sprite Sheets/Rocks - spinning - master sprite sheet - 128x128 - Sheet B.png"
-dest_files=["res://.godot/imported/Rocks - spinning - master sprite sheet - 128x128 - Sheet B.png-6ba75dcfbda69bb5676cde3e802159a1.ctex"]
+source_file="res://Assets/Graphics/Textures/Rocks Spinning Sprite Sheets/Rocks - spinning - master sprite sheet - 128x128 - Sheet A.png"
+dest_files=["res://.godot/imported/Rocks - spinning - master sprite sheet - 128x128 - Sheet A.png-44422d44139de2ec6d9bf0c6d416a3aa.ctex"]
 
 [params]
 

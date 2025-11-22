@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dheyp0sjns5ab"
-path="res://.godot/imported/Rocks - spinning - master sprite sheet - 128x128 - Sheet A.png-3df612877df2a5e718537b4c55ede5cd.ctex"
+uid="uid://c2hpf5845temy"
+path="res://.godot/imported/Copper Steamback - HD - exploded - pieces - master sprite sheet - all 64x64.png-2de074d76583548dbfe8639ae941c47d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Graphics/Rocks Spinning Sprite Sheets/Rocks - spinning - master sprite sheet - 128x128 - Sheet A.png"
-dest_files=["res://.godot/imported/Rocks - spinning - master sprite sheet - 128x128 - Sheet A.png-3df612877df2a5e718537b4c55ede5cd.ctex"]
+source_file="res://Assets/Graphics/Textures/Exploded Ships Sprite Sheets/Copper Steamback - HD - exploded - pieces - master sprite sheet - all 64x64.png"
+dest_files=["res://.godot/imported/Copper Steamback - HD - exploded - pieces - master sprite sheet - all 64x64.png-2de074d76583548dbfe8639ae941c47d.ctex"]
 
 [params]
 

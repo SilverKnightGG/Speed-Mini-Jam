@@ -52,6 +52,7 @@ func _toggle_fuel(toggle_sign: int):
 		times_checked += 1
 		if times_checked > FUEL_SPEEDS.size() - 1:
 			Registry.out_of_fuel()
+			break
 
 
 func exhaust_fuel(type: Registry.ElementType):

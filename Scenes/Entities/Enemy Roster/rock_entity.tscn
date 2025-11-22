@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://buxuyyfe6c2no" path="res://Scenes/Entities/static_entity.gd" id="1_gk25j"]
 [ext_resource type="Script" uid="uid://bwhdiepo5jj0u" path="res://Scenes/Entities/simple_physics_area.gd" id="2_6frib"]
 [ext_resource type="Script" uid="uid://b74k3hljc2ftk" path="res://Scenes/Entities/moving_nodes.gd" id="3_o61a6"]
-[ext_resource type="Texture2D" uid="uid://dheyp0sjns5ab" path="res://Assets/Graphics/Rocks Spinning Sprite Sheets/Rocks - spinning - master sprite sheet - 128x128 - Sheet A.png" id="4_jfaiv"]
-[ext_resource type="Texture2D" uid="uid://di1g3kr26utel" path="res://Assets/Graphics/Rocks Spinning Sprite Sheets/Rocks - spinning - master sprite sheet - 128x128 - Sheet B.png" id="5_db0qi"]
+[ext_resource type="Texture2D" uid="uid://dheyp0sjns5ab" path="res://Assets/Graphics/Textures/Rocks Spinning Sprite Sheets/Rocks - spinning - master sprite sheet - 128x128 - Sheet A.png" id="4_jfaiv"]
+[ext_resource type="Texture2D" uid="uid://di1g3kr26utel" path="res://Assets/Graphics/Textures/Rocks Spinning Sprite Sheets/Rocks - spinning - master sprite sheet - 128x128 - Sheet B.png" id="5_db0qi"]
 [ext_resource type="Script" uid="uid://16tel460ewwu" path="res://Scenes/Entities/Enemy Roster/spinning_animated_sprite.gd" id="6_qo38l"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eju28"]

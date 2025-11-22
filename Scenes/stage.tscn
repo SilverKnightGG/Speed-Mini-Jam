@@ -8,7 +8,16 @@
 [node name="Stage" type="Node2D"]
 script = ExtResource("1_xgxar")
 
-[node name="Background" parent="." instance=ExtResource("2_70rqm")]
+[node name="Background0" parent="." instance=ExtResource("2_70rqm")]
+position = Vector2(-1024, 0)
+
+[node name="Background1" parent="." instance=ExtResource("2_70rqm")]
+
+[node name="Background2" parent="." instance=ExtResource("2_70rqm")]
+position = Vector2(1024, 0)
+
+[node name="Background3" parent="." instance=ExtResource("2_70rqm")]
+position = Vector2(2048, 0)
 
 [node name="ShipEntity" parent="." instance=ExtResource("2_plxqo")]
 

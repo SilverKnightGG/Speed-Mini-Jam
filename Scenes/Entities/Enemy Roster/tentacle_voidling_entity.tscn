@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://bwhdiepo5jj0u" path="res://Scenes/Entities/simple_physics_area.gd" id="2_gvr11"]
 [ext_resource type="Script" uid="uid://18qbvfo0etqi" path="res://Scenes/Entities/move_toward_behavior.gd" id="3_ppm4v"]
 [ext_resource type="Script" uid="uid://b74k3hljc2ftk" path="res://Scenes/Entities/moving_nodes.gd" id="4_r5tbd"]
-[ext_resource type="Texture2D" uid="uid://dheyp0sjns5ab" path="res://Assets/Graphics/Rocks Spinning Sprite Sheets/Rocks - spinning - master sprite sheet - 128x128 - Sheet A.png" id="5_gf18w"]
-[ext_resource type="Texture2D" uid="uid://di1g3kr26utel" path="res://Assets/Graphics/Rocks Spinning Sprite Sheets/Rocks - spinning - master sprite sheet - 128x128 - Sheet B.png" id="6_f5r7y"]
+[ext_resource type="Texture2D" uid="uid://dheyp0sjns5ab" path="res://Assets/Graphics/Textures/Rocks Spinning Sprite Sheets/Rocks - spinning - master sprite sheet - 128x128 - Sheet A.png" id="5_gf18w"]
+[ext_resource type="Texture2D" uid="uid://di1g3kr26utel" path="res://Assets/Graphics/Textures/Rocks Spinning Sprite Sheets/Rocks - spinning - master sprite sheet - 128x128 - Sheet B.png" id="6_f5r7y"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eju28"]
 radius = 24.0

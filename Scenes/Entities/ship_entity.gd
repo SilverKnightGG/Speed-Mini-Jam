@@ -28,6 +28,7 @@ var source_top_speed: float = 0.0
 var current_atlas_texture: AtlasTexture
 @onready var after_image_duration: float = effect_length_factor
 @onready var after_image_separation_time: float = effect_length_factor / number_of_after_images
+@onready var speed_lines: Sprite2D = %SpeedLines
 
 
 # Connect this to a signal that emits when the SpriteFrames' animation changes.
@@ -43,11 +44,14 @@ func _on_update_speed_references(current_speed: float, max_speed: float):
 func _process(delta):
 	super._process(delta)
 	_adjust_after_image_properties(delta)
+	speed_lines.material.set_shader_parameter("f_alpha", clampf(mover.current_velocity.x / mover.base_max_speed, 0.0, 0.9))
 	if not drawing_after_image: return
 	frames_timer -= delta
 	if frames_timer <= 0.0:
 		frames_timer += after_image_separation_time
 		_instantiate_new_after_image()
+	
+	
 
 
 func _adjust_after_image_properties(delta: float):
@@ -104,5 +108,6 @@ func _on_fuel_changed(new_fuel: Registry.ElementType):
 
 func _ready():
 	super._ready()
-	frame_source.animation_changed.connect(_on_update_current_animation)
-	_on_update_current_animation()
+	Registry.ship = self
+	#frame_source.animation_changed.connect(_on_update_current_animation)
+	#_on_update_current_animation()

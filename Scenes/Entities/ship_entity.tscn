@@ -1,23 +1,56 @@
-[gd_scene load_steps=9 format=3 uid="uid://uh16to4u3v10"]
+[gd_scene load_steps=16 format=3 uid="uid://uh16to4u3v10"]
 
 [ext_resource type="Script" uid="uid://byna0dlam2tsv" path="res://Scenes/Entities/ship_entity.gd" id="1_5cpm7"]
 [ext_resource type="Script" uid="uid://cw575umgb5cxg" path="res://Scenes/Entities/ship_mover.gd" id="2_5cpm7"]
 [ext_resource type="Texture2D" uid="uid://ejf7qeub7usi" path="res://Assets/Graphics/Textures/Galleon.png" id="3_rif75"]
 [ext_resource type="Script" uid="uid://tnuibtauyqsa" path="res://Scenes/Entities/input_movement.gd" id="4_buhsh"]
 [ext_resource type="Script" uid="uid://b74k3hljc2ftk" path="res://Scenes/Entities/moving_nodes.gd" id="5_rif75"]
+[ext_resource type="Shader" uid="uid://cipy7scuv1nkv" path="res://Assets/Graphics/Shaders/speed_lines.gdshader" id="6_byr66"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eju28"]
 radius = 24.0
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5cpm7"]
+
 [sub_resource type="Gradient" id="Gradient_5cpm7"]
 interpolation_mode = 2
-offsets = PackedFloat32Array(0.0519481, 0.162338, 0.383117, 0.519481, 0.720779, 0.935065)
-colors = PackedColorArray(0.931552, 0.751742, 0.220603, 1, 0.422145, 0.868124, 0.999784, 1, 0.163815, 0.504447, 0.911079, 1, 0.16705, 0.485013, 0.852948, 1, 0, 0.230633, 0.4757, 1, 0.2964, 0.0546, 0.78, 1)
+offsets = PackedFloat32Array(0.06, 0.162338, 0.383117, 0.519481, 0.720779, 0.935065)
+colors = PackedColorArray(1, 0.83, 0.32, 1, 0.55, 0.895, 1, 1, 0.091, 0.45955, 0.91, 1, 0.2, 0.573333, 1, 1, 0, 0.299667, 0.62, 1, 0.3344, 0.0616, 0.88, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_byr66"]
 gradient = SubResource("Gradient_5cpm7")
 width = 1024
 height = 768
+fill_from = Vector2(1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_3ku8u"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_sbkg2"]
+width = 24
+height = 4096
+seamless = true
+seamless_blend_skirt = 0.876
+noise = SubResource("FastNoiseLite_3ku8u")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_58g87"]
+shader = ExtResource("6_byr66")
+shader_parameter/noise = SubResource("NoiseTexture2D_sbkg2")
+shader_parameter/line_color_a = Color(0.58, 0.58, 1, 0.235294)
+shader_parameter/line_color_b = Color(0.011, 0.06, 0, 0.0980392)
+shader_parameter/back_color = Color(0, 0.2565, 0.27, 0)
+shader_parameter/line_threshold = 0.66
+shader_parameter/speed = 1.0
+shader_parameter/line_length = 12.0
+shader_parameter/angle = 0.0
+shader_parameter/f_alpha = 1.0
+
+[sub_resource type="Gradient" id="Gradient_nkfhd"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_p5mvh"]
+gradient = SubResource("Gradient_nkfhd")
+width = 1024
+height = 1024
 fill_from = Vector2(1, 1)
 
 [node name="ShipEntity" type="Node2D" node_paths=PackedStringArray("scale_source")]
@@ -28,6 +61,8 @@ scale_source = NodePath("MovingNodes")
 unique_name_in_owner = true
 script = ExtResource("2_5cpm7")
 navigation = 1
+base_max_speed = 300.0
+base_acceleration = 150.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Mover"]
 unique_name_in_owner = true
@@ -45,8 +80,8 @@ unique_name_in_owner = true
 script = ExtResource("5_rif75")
 
 [node name="GradientBackground" type="Sprite2D" parent="MovingNodes"]
-self_modulate = Color(0.63, 0.63, 0.63, 1)
 z_index = -2
+material = SubResource("CanvasItemMaterial_5cpm7")
 position = Vector2(1.49998, 1.50001)
 scale = Vector2(1.27051, 0.923177)
 texture = SubResource("GradientTexture2D_byr66")
@@ -56,6 +91,15 @@ unique_name_in_owner = true
 texture = ExtResource("3_rif75")
 
 [node name="Camera2D" type="Camera2D" parent="MovingNodes"]
+
+[node name="SpeedLines" type="Sprite2D" parent="MovingNodes"]
+unique_name_in_owner = true
+z_index = 8
+texture_repeat = 2
+material = SubResource("ShaderMaterial_58g87")
+position = Vector2(-1.90735e-06, -2.5)
+scale = Vector2(1.21094, 0.700195)
+texture = SubResource("GradientTexture2D_p5mvh")
 
 [node name="FuelConsumptionTimer" type="Timer" parent="."]
 unique_name_in_owner = true

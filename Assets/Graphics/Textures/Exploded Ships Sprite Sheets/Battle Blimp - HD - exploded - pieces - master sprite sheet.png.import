@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dmay1xkucgeso"
-path="res://.godot/imported/Battle Blimp - HD - exploded - pieces - master sprite sheet.png-3d613d0265d2c3badd234b454a0adc9a.ctex"
+path="res://.godot/imported/Battle Blimp - HD - exploded - pieces - master sprite sheet.png-e68c895f6f9601c3d2dfb75b7136c05e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Graphics/Exploded Ships Sprite Sheets/Battle Blimp - HD - exploded - pieces - master sprite sheet.png"
-dest_files=["res://.godot/imported/Battle Blimp - HD - exploded - pieces - master sprite sheet.png-3d613d0265d2c3badd234b454a0adc9a.ctex"]
+source_file="res://Assets/Graphics/Textures/Exploded Ships Sprite Sheets/Battle Blimp - HD - exploded - pieces - master sprite sheet.png"
+dest_files=["res://.godot/imported/Battle Blimp - HD - exploded - pieces - master sprite sheet.png-e68c895f6f9601c3d2dfb75b7136c05e.ctex"]
 
 [params]
 

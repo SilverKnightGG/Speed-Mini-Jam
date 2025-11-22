@@ -50,3 +50,7 @@ func _on_ship_entered_warning_area(_area):
 
 func _on_ship_entered_death_area(_area):
 	pass
+
+
+func out_of_fuel():
+	pass

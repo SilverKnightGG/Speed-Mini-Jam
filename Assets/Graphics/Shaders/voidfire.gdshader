@@ -5,8 +5,8 @@ render_mode blend_add;
 uniform float timeScaleFactor = .04;
 
 // edge span
-uniform float edge_size : hint_range(0.0001, 1.0, 0.0001) = 0.2;
-uniform float edge_fade : hint_range(0.0001, 1.0, 0.001) = 0.2;
+uniform float edge_size : hint_range(0.000, 1.0, 0.0001) = 0.2;
+uniform float edge_fade : hint_range(0.000, 1.0, 0.001) = 0.2;
 uniform float edge_start : hint_range(0.0, 1.0, 0.01) = 1.0;
 
 // User-controlled colors
@@ -95,8 +95,8 @@ void fragment() {
 
     col = pow(col, vec3(1.4));
 	
-	float edge_mask = smoothstep(edge_start, edge_start - edge_size, UV.x);
-	float burn_mask = smoothstep(edge_start, edge_start - edge_fade, edge_start - (((col.r + col.g + col.b) / 3.0) * edge_mask));
+	float edge_mask = smoothstep(edge_start, edge_start - (edge_size + 0.000001), UV.x);
+	float burn_mask = smoothstep(edge_start, edge_start - (edge_fade + 0.000001), edge_start - (((col.r + col.g + col.b) / 3.0) * edge_mask));
 	float alpha = burn_mask * edge_mask;
 	
 	if (burn_mask > 0.1) {

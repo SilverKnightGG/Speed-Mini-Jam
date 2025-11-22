@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://be6g8bg1i1w5a"]
+[gd_scene load_steps=16 format=3 uid="uid://be6g8bg1i1w5a"]
 
+[ext_resource type="Script" uid="uid://btm4dya64img4" path="res://Scenes/background_tile.gd" id="1_85jdc"]
 [ext_resource type="Script" uid="uid://bqm8slv8tunyk" path="res://Scenes/shunt_barrier.gd" id="1_vkslf"]
+[ext_resource type="Shader" uid="uid://bwpc60eyqvgei" path="res://Assets/Graphics/Shaders/background_tile_brighten.gdshader" id="3_q8qhf"]
 
 [sub_resource type="Gradient" id="Gradient_plxqo"]
 offsets = PackedFloat32Array(0.2, 0.35, 0.65, 0.8)
@@ -15,9 +17,57 @@ fill_from = Vector2(1, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vuyue"]
 size = Vector2(1024, 512)
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_hc11l"]
+frequency = 0.0071
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_i7pcg"]
+width = 128
+height = 2048
+seamless = true
+noise = SubResource("FastNoiseLite_hc11l")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rw8mr"]
+frequency = 0.0234
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6ev4t"]
+width = 128
+height = 2048
+seamless = true
+noise = SubResource("FastNoiseLite_rw8mr")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_oj20b"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pycg7"]
+width = 128
+height = 2048
+seamless = true
+noise = SubResource("FastNoiseLite_oj20b")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_efww3"]
+shader = ExtResource("3_q8qhf")
+shader_parameter/front_texture = SubResource("NoiseTexture2D_pycg7")
+shader_parameter/bg_texture0 = SubResource("NoiseTexture2D_i7pcg")
+shader_parameter/bg_texture1 = SubResource("NoiseTexture2D_6ev4t")
+shader_parameter/speed_front = 0.05
+shader_parameter/speed_bg0 = 0.12
+shader_parameter/speed_bg1 = 0.2
+shader_parameter/y_offset = 0.00200001
+shader_parameter/x_offset = 0.00100001
+
+[sub_resource type="Gradient" id="Gradient_nkfhd"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_h3psb"]
+gradient = SubResource("Gradient_nkfhd")
+width = 1024
+height = 4096
+fill_from = Vector2(1, 1)
+
 [node name="Background" type="Sprite2D"]
 z_index = -1
+texture_filter = 1
 texture = SubResource("GradientTexture2D_70rqm")
+script = ExtResource("1_85jdc")
 
 [node name="TopBound" type="Area2D" parent="."]
 collision_layer = 3
@@ -37,3 +87,13 @@ script = ExtResource("1_vkslf")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BottomBound"]
 position = Vector2(0, 1792)
 shape = SubResource("RectangleShape2D_vuyue")
+
+[node name="BackgroundVapor" type="Sprite2D" parent="."]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_efww3")
+texture = SubResource("GradientTexture2D_h3psb")
+
+[node name="BackgroundVapor2" type="Sprite2D" parent="."]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_efww3")
+texture = SubResource("GradientTexture2D_h3psb")
