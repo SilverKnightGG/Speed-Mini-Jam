@@ -46,7 +46,7 @@ func _toggle_fuel(toggle_sign: int):
 	var toggled: bool = false
 	var times_checked: int = 0
 	while toggled == false:
-		Registry.burning_fuel_type = wrapi(Registry.burning_fuel_type + toggle_sign, 0, FUEL_SPEEDS.size())
+		Registry.burning_fuel_type = wrapi(Registry.burning_fuel_type + toggle_sign, 0, FUEL_SPEEDS.size()) as Registry.ElementType
 		if Registry.fuel_amounts[Registry.burning_fuel_type] > 0:
 			toggled = true
 		times_checked += 1
@@ -71,3 +71,7 @@ func set_max_speed(type: Registry.ElementType):
 func _on_fuel_consumption_timer_timeout():
 	Registry.use_fuel()
 	fuel_timer.start()
+
+
+func set_phased_out(phased: bool):
+	set_collision_layer_value(0, phased)

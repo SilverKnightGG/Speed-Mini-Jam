@@ -29,6 +29,7 @@ script = ExtResource("3_rcuow")
 
 [node name="MoverSprite" type="Sprite2D" parent="MovingNodes"]
 unique_name_in_owner = true
+region_enabled = true
 script = ExtResource("6_8yo1o")
 
 [connection signal="area_entered" from="Mover" to="MovingNodes/MoverSprite" method="_on_change_rotation"]
