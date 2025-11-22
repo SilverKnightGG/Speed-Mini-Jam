@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bhc4v8e7woqum"]
+[gd_scene load_steps=6 format=3 uid="uid://bhc4v8e7woqum"]
 
 [ext_resource type="Script" uid="uid://d4ia61qi0cbin" path="res://Scenes/Entitiesobject.gd" id="1_y6qv6"]
 [ext_resource type="Script" uid="uid://bwhdiepo5jj0u" path="res://Scenes/Entities/simple_physics_area.gd" id="2_iothp"]
 [ext_resource type="Script" uid="uid://b74k3hljc2ftk" path="res://Scenes/Entities/moving_nodes.gd" id="4_04u4h"]
-[ext_resource type="Texture2D" uid="uid://ejf7qeub7usi" path="res://Assets/Graphics/Textures/Galleon.png" id="5_nmwn6"]
 [ext_resource type="Script" uid="uid://18qbvfo0etqi" path="res://Scenes/Entities/move_toward_behavior.gd" id="5_y6qv6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eju28"]
@@ -31,6 +30,5 @@ script = ExtResource("5_y6qv6")
 unique_name_in_owner = true
 script = ExtResource("4_04u4h")
 
-[node name="MoverSprite" type="Sprite2D" parent="MovingNodes"]
+[node name="MoverSprite" type="AnimatedSprite2D" parent="MovingNodes"]
 unique_name_in_owner = true
-texture = ExtResource("5_nmwn6")

@@ -1,16 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://b2ro5xkrlswat"]
+[gd_scene load_steps=4 format=3 uid="uid://b2ro5xkrlswat"]
 
 [ext_resource type="Script" uid="uid://dfgibm7j2hqga" path="res://Scenes/Entities/fuel_pickup.gd" id="1_kdcoi"]
+[ext_resource type="Texture2D" uid="uid://lwfubu2tg3gm" path="res://Assets/Graphics/Textures/pickups_rect_64x64_fr.png" id="2_ygau7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ygau7"]
+radius = 27.0185
 
 [node name="FuelPickup" type="Area2D"]
 script = ExtResource("1_kdcoi")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_ygau7")
-
 [node name="FuelSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
+texture = ExtResource("2_ygau7")
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ygau7")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
