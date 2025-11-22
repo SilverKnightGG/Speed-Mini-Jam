@@ -8,8 +8,19 @@ const MIN_PICKUP_SPAWN_TIME: float = 1.0
 const MAX_PICKUP_SPAWN_TIME: float = 25.0
 const PICKUP_SPAWN_CURVE: float = 5.0
 
+const PROGRESS_ZENITH: float = 1000.0 # seconds (So, game considers this to be a pivotal point, beyond which things begine getting much harder)
+const BASE_ALLOWED_X_OFFSET: float = 1000.0
+const SPAWN_OFFSET_VARIANCE: float = 100.0
+const VERTICAL_SPAWN_OFFSET_RANGE: float = 324.0
+
 @onready var entity_spawn_timer: Timer = %EntitySpawnTimer
 @onready var pickup_spawn_timer: Timer = %PickupSpawnTimer
+
+var progress: float = 0.0
+
+
+func _process(delta):
+	progress += delta
 
 
 func _on_entity_spawn_timer_timeout():
@@ -23,8 +34,22 @@ func _on_pickup_spawn_timer_timeout():
 
 
 func _spawn_entity():
-	pass
+	var new_entity: Entity = EntityTable.get_entity(progress)
+	
+	new_entity.global_position = Registry.ship.global_position + Vector2(
+		randf_range(BASE_ALLOWED_X_OFFSET, BASE_ALLOWED_X_OFFSET + SPAWN_OFFSET_VARIANCE),
+		randf_range(-VERTICAL_SPAWN_OFFSET_RANGE, VERTICAL_SPAWN_OFFSET_RANGE)
+		)
+	
+	add_child(new_entity)
 
 
 func _spawn_pickup():
-	pass
+	var new_fuel_pickup: FuelPickup = FuelPickup.PACKEDSCENE.instantiate()
+	
+	new_fuel_pickup.global_position = Registry.ship.global_position + Vector2(
+		randf_range(BASE_ALLOWED_X_OFFSET, BASE_ALLOWED_X_OFFSET + SPAWN_OFFSET_VARIANCE),
+		randf_range(-VERTICAL_SPAWN_OFFSET_RANGE, VERTICAL_SPAWN_OFFSET_RANGE)
+		)
+	
+	add_child(new_fuel_pickup)

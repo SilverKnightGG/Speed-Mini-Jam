@@ -3,6 +3,7 @@ class_name FuelPickup extends Area2D
 const FUEL_AMOUNT_MIN: int = 1
 const FUEL_AMOUNT_MAX: int = 10
 const FUEL_RANDOM_CURVE: float = 4.0 # ease-in (lower = more common, higher = more rare)
+const PACKEDSCENE: PackedScene = preload("uid://b2ro5xkrlswat")
 
 
 const FUEL_TEXTURE_SIZE: Vector2 = Vector2(64.0, 64.0)

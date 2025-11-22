@@ -1,5 +1,7 @@
 extends Node
 
+# autload
+
 enum ElementType {ETERNEON, MALNEON, VOLANTEON, ALL}
 
 var main: Node = null

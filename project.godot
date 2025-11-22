@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Registry="*res://Scenes/Autoload/registry.gd"
+EntityTable="*res://Assets/Data/entity_table.gd"
 
 [input]
 
