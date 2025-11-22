@@ -43,18 +43,6 @@ var target_node2d: Node2D
 var target_direction: Vector2 = Vector2.ZERO
 var knockback_velocity: Vector2 = Vector2.ZERO
 
-var stalling: bool = false:
-	set(new_stalling):
-		stalling = new_stalling
-		
-		if stalling:
-			state = State.IDLE
-			# a switch for allowing Knockback to continue while keeping IDLE as last_state
-			if last_state == State.KNOCKBACK:
-				state = State.KNOCKBACK
-		else:
-			state = last_state
-
 enum State {STOPPED, IDLE, MOVING, KNOCKBACK, _FLIP_}
 var state: State = State.MOVING:
 	set(new_state):

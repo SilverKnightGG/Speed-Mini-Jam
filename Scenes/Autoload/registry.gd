@@ -17,9 +17,15 @@ var fuel_amounts: Dictionary[ElementType, int] = {
 			for amount in fuel_amounts.values():
 				if amount > 0:
 					depleted = false
-					ship.mover.stalling(false)
+					ship.mover.set_stalling(false)
 					return
-			ship.mover.stalling(true)
+			ship.mover.set_stalling(true)
+
+var burning_fuel_type: ElementType = ElementType.ETERNEON:
+	set(new_type):
+		burning_fuel_type = new_type
+		
+		ship.mover.set_max_speed(burning_fuel_type)
 
 
 func add_fuel(type: ElementType, amount: int):

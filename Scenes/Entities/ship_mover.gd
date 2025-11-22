@@ -6,15 +6,21 @@ const FUEL_SPEEDS = {
 	Registry.ElementType.VOLANTEON: 1.0
 	}
 
-var burning_fuel_type: Registry.ElementType = Registry.ElementType.ETERNEON:
-	set(new_type):
-		burning_fuel_type = new_type
-		
-		max_speed
-
-
 const TOGGLE_UP: int = 1
 const TOGGLE_DOWN: int = -1
+
+var stalling: bool = false:
+	set(new_stalling):
+		stalling = new_stalling
+		
+		if stalling:
+			state = State.IDLE
+			# a switch for allowing Knockback to continue while keeping IDLE as last_state
+			if last_state == State.KNOCKBACK:
+				state = State.KNOCKBACK
+		else:
+			state = last_state
+
 
 func _unhandled_input(event):
 	if event.is_action_released("FUEL_TOGGLE_UP"):
@@ -31,15 +37,15 @@ func _unhandled_input(event):
 
 func _switch_fuel(type: Registry.ElementType):
 	if Registry.fuel_amounts[type] > 0:
-		burning_fuel_type = type
+		Registry.burning_fuel_type = type
 
 
 func _toggle_fuel(toggle_sign: int):
 	var toggled: bool = false
 	var times_checked: int = 0
 	while toggled == false:
-		burning_fuel_type = wrapi(burning_fuel_type + toggle_sign, 0, FUEL_SPEEDS.size())
-		if Registry.fuel_amounts[burning_fuel_type] > 0:
+		Registry.burning_fuel_type = wrapi(Registry.burning_fuel_type + toggle_sign, 0, FUEL_SPEEDS.size())
+		if Registry.fuel_amounts[Registry.burning_fuel_type] > 0:
 			toggled = true
 		times_checked += 1
 		if times_checked > FUEL_SPEEDS.size() - 1:
@@ -47,5 +53,14 @@ func _toggle_fuel(toggle_sign: int):
 
 
 func exhaust_fuel(type: Registry.ElementType):
-	if burning_fuel_type == type:
+	if Registry.burning_fuel_type == type:
 		_toggle_fuel(TOGGLE_UP)
+
+
+func set_stalling(value: bool):
+	stalling = value
+
+
+func set_max_speed(type: Registry.ElementType):
+	max_speed = base_max_speed * FUEL_SPEEDS[type]
+	acceleration = base_acceleration * FUEL_SPEEDS[type]
