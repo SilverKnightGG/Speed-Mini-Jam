@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://uh16to4u3v10"]
 
 [ext_resource type="Script" uid="uid://byna0dlam2tsv" path="res://Scenes/Entities/ship_entity.gd" id="1_5cpm7"]
-[ext_resource type="Script" uid="uid://bwhdiepo5jj0u" path="res://Scenes/Entities/simple_physics_area.gd" id="2_buhsh"]
+[ext_resource type="Script" uid="uid://cw575umgb5cxg" path="res://Scenes/Entities/ship_mover.gd" id="2_5cpm7"]
 [ext_resource type="Texture2D" uid="uid://ejf7qeub7usi" path="res://Assets/Graphics/Textures/Galleon.png" id="3_rif75"]
 [ext_resource type="Script" uid="uid://tnuibtauyqsa" path="res://Scenes/Entities/input_movement.gd" id="4_buhsh"]
 [ext_resource type="Script" uid="uid://b74k3hljc2ftk" path="res://Scenes/Entities/moving_nodes.gd" id="5_rif75"]
@@ -26,10 +26,8 @@ scale_source = NodePath("MovingNodes")
 
 [node name="Mover" type="Area2D" parent="."]
 unique_name_in_owner = true
-script = ExtResource("2_buhsh")
+script = ExtResource("2_5cpm7")
 navigation = 1
-max_speed = 1000.0
-acceleration = 1000.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Mover"]
 unique_name_in_owner = true

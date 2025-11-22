@@ -20,6 +20,7 @@ const FORCE_VALUE_DEFAULTS = {
 	Force.REPULSIONS: Vector2.ZERO
 	}
 
+
 ## Applied to the calculation for shunting as a multiplier to allow fine-tuning.
 @export_range(MIN_WEIGHT_FACTOR, MAX_WEIGHT_FACTOR, MIN_WEIGHT_FACTOR) var weight_factor = DEFAULT_WEIGHT_FACTOR
 
@@ -41,6 +42,18 @@ var desired_vector2: Vector2 = Vector2.ZERO
 var target_node2d: Node2D
 var target_direction: Vector2 = Vector2.ZERO
 var knockback_velocity: Vector2 = Vector2.ZERO
+
+var stalling: bool = false:
+	set(new_stalling):
+		stalling = new_stalling
+		
+		if stalling:
+			state = State.IDLE
+			# a switch for allowing Knockback to continue while keeping IDLE as last_state
+			if last_state == State.KNOCKBACK:
+				state = State.KNOCKBACK
+		else:
+			state = last_state
 
 enum State {STOPPED, IDLE, MOVING, KNOCKBACK, _FLIP_}
 var state: State = State.MOVING:
@@ -80,9 +93,11 @@ enum Force {WIND, GRAVITY, ATTRACTIONS, REPULSIONS}
 var forces_used: Array[Force] = []
 
 ## For ballsitic or linear constant speed, set acceleration to a very high value.
-@export var max_speed: float = 0.0
+@export var base_max_speed: float = 100.0
+@onready var max_speed: float = base_max_speed
 
-@export var acceleration: float = 0.0
+@export var base_acceleration: float = 100.0
+@onready var acceleration: float = base_acceleration
 
 
 @onready var collision_shape: CollisionShape2D = %CollisionShape2D
