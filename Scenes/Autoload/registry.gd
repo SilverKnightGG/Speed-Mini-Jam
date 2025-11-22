@@ -7,9 +7,9 @@ var ship: ShipEntity = null
 
 var depleted: bool = false
 var fuel_amounts: Dictionary[ElementType, int] = {
-	ElementType.ETERNEON: 0,
-	ElementType.MALNEON: 0,
-	ElementType.VOLANTEON: 0
+	ElementType.ETERNEON: 10,
+	ElementType.MALNEON: 10,
+	ElementType.VOLANTEON: 10
 	}:
 		set(new_fuel_amounts):
 			fuel_amounts = new_fuel_amounts
@@ -26,6 +26,12 @@ var burning_fuel_type: ElementType = ElementType.ETERNEON:
 		burning_fuel_type = new_type
 		
 		ship.mover.set_max_speed(burning_fuel_type)
+
+
+func use_fuel():
+	fuel_amounts[burning_fuel_type] = clampi(fuel_amounts[burning_fuel_type] - 1, 0, INF)
+	if fuel_amounts[burning_fuel_type] < 1:
+		ship.mover._toggle_fuel(ShipMover.TOGGLE_UP)
 
 
 func add_fuel(type: ElementType, amount: int):

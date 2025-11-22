@@ -21,6 +21,8 @@ var stalling: bool = false:
 		else:
 			state = last_state
 
+@onready var fuel_timer: Timer = %FuelConsumptionTimer
+
 
 func _unhandled_input(event):
 	if event.is_action_released("FUEL_TOGGLE_UP"):
@@ -64,3 +66,8 @@ func set_stalling(value: bool):
 func set_max_speed(type: Registry.ElementType):
 	max_speed = base_max_speed * FUEL_SPEEDS[type]
 	acceleration = base_acceleration * FUEL_SPEEDS[type]
+
+
+func _on_fuel_consumption_timer_timeout():
+	Registry.use_fuel()
+	fuel_timer.start()

@@ -56,3 +56,9 @@ unique_name_in_owner = true
 texture = ExtResource("3_rif75")
 
 [node name="Camera2D" type="Camera2D" parent="MovingNodes"]
+
+[node name="FuelConsumptionTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+autostart = true
+
+[connection signal="timeout" from="FuelConsumptionTimer" to="Mover" method="_on_fuel_consumption_timer_timeout"]
