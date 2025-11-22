@@ -1,13 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://ctwu80l76nigy"]
+[gd_scene load_steps=5 format=3 uid="uid://ctwu80l76nigy"]
 
+[ext_resource type="Script" uid="uid://ct4dir3lbis5b" path="res://Scenes/stage.gd" id="1_xgxar"]
 [ext_resource type="PackedScene" uid="uid://be6g8bg1i1w5a" path="res://Scenes/background_tile.tscn" id="2_70rqm"]
 [ext_resource type="PackedScene" uid="uid://uh16to4u3v10" path="res://Scenes/Entities/ship_entity.tscn" id="2_plxqo"]
 [ext_resource type="PackedScene" uid="uid://dyhp3dmdx13gm" path="res://Scenes/Entities/voidfire_wall.tscn" id="3_70rqm"]
 
 [node name="Stage" type="Node2D"]
+script = ExtResource("1_xgxar")
 
 [node name="Background" parent="." instance=ExtResource("2_70rqm")]
 
 [node name="ShipEntity" parent="." instance=ExtResource("2_plxqo")]
 
 [node name="VoidfireWall" parent="." instance=ExtResource("3_70rqm")]
+
+[node name="EntitySpawnTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[node name="PickupSpawnTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[connection signal="timeout" from="EntitySpawnTimer" to="." method="_on_entity_spawn_timer_timeout"]
+[connection signal="timeout" from="PickupSpawnTimer" to="." method="_on_pickup_spawn_timer_timeout"]
