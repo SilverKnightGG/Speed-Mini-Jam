@@ -23,8 +23,8 @@ func _on_area_tree_exiting():
 	pass
 
 
-func get_shunt_power(shunting_mover: MovementArea) -> float:
-	return (shunt_power if shunt_power > 0.0 else DEFAULT_SHUNT_POWER) + shunting_mover.collision_shape.shape.radius
+func get_shunt_power() -> float:
+	return (shunt_power if shunt_power > 0.0 else DEFAULT_SHUNT_POWER) + (collision_shape.shape.size.y / 2.0)
 
 
 func _add_shunt_source(area: MovementArea):

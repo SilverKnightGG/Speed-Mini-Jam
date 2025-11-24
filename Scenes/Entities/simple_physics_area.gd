@@ -155,11 +155,16 @@ func _movement(delta):
 
 
 func _calculate_shunt(delta) -> Vector2:
+	if stored_shunt_sources.size() < 1:
+		return Vector2.ZERO
+	print("calculating shunt")
+	
 	var incoming_shunt_velocity := Vector2.ZERO
 	
 	for source in stored_shunt_sources.values():
 		if !is_instance_valid(source.area): continue
 		
+		# TODO This part needs to change for the static ones
 		var direction: Vector2 = global_position - source.area.global_position
 		var distance: float = direction.length()
 		var shunt_power: float = source.shunt_power
@@ -229,8 +234,8 @@ func _on_receive_new_trajectory(new_trajectory: Vector2, force_changes: Dictiona
 	target_node2d = null
 
 
-func get_shunt_power(shunting_mover: MovementArea) -> float:
-	return collision_shape.shape.radius + shunting_mover.collision_shape.shape.radius
+func get_shunt_power() -> float:
+	return collision_shape.shape.radius + collision_shape.shape.radius
 
 
 func _add_shunt_source(area: MovementArea):
@@ -238,7 +243,7 @@ func _add_shunt_source(area: MovementArea):
 		area.tree_exiting.connect(_on_area_tree_exiting)
 	var profile := ShuntSourceProfile.new()
 	profile.area = area
-	profile.shunt_power = get_shunt_power(area)
+	profile.shunt_power = area.get_shunt_power()
 	stored_shunt_sources[area.get_instance_id()] = profile
 
 

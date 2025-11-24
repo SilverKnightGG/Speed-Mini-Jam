@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b7lnfh5ujiu17"
+path="res://.godot/imported/SoE Main Theme - Demo Mix 7.mp3-1ff28f0a86f6d103a477bb57ab27b576.mp3str"
+
+[deps]
+
+source_file="res://Assets/Music/SoE Main Theme - Demo Mix 7.mp3"
+dest_files=["res://.godot/imported/SoE Main Theme - Demo Mix 7.mp3-1ff28f0a86f6d103a477bb57ab27b576.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
