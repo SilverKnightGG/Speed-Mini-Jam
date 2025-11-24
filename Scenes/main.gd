@@ -79,8 +79,15 @@ func _leave_credits():
 
 
 func _input(event):
-	if event.is_action_released("ui_accept") or event is InputEventMouseButton:
-		state = State.STAGE if state == State.SPLASH else State.PAUSED
+	if event.is_action_released("ui_accept") or event.is_action_released("MOUSE_CLICK"):
+		print("ui accept or mouse event")
+		match state:
+			State.STAGE:
+				state = State.PAUSED
+			State.PAUSED:
+				state = State.STAGE
+			State.SPLASH:
+				state = State.STAGE
 
 
 func _ready():

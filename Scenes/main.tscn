@@ -12,12 +12,20 @@ shadow_color = Color(0, 0, 0, 0.733333)
 shadow_offset = Vector2(2, 2)
 
 [node name="Main" type="Node"]
+process_mode = 3
 script = ExtResource("1_jjgbg")
 
-[node name="Splash" parent="." instance=ExtResource("2_bo1nx")]
-unique_name_in_owner = true
+[node name="CanvasLayerUI" type="CanvasLayer" parent="."]
 
-[node name="PausedGame" type="CenterContainer" parent="."]
+[node name="Splash" parent="CanvasLayerUI" instance=ExtResource("2_bo1nx")]
+unique_name_in_owner = true
+offset_left = -24.0
+offset_top = -11.0
+offset_right = 24.0
+offset_bottom = 11.0
+mouse_filter = 2
+
+[node name="PausedGame" type="CenterContainer" parent="CanvasLayerUI"]
 unique_name_in_owner = true
 visible = false
 anchors_preset = 15
@@ -25,9 +33,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("3_8gbba")
 
-[node name="Label" type="Label" parent="PausedGame"]
+[node name="Label" type="Label" parent="CanvasLayerUI/PausedGame"]
 layout_mode = 2
 text = "PAUSED"
 label_settings = SubResource("LabelSettings_8gbba")

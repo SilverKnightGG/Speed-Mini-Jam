@@ -1,7 +1,7 @@
 extends CenterContainer
 
 
-func pause_toggle(is_paused: bool):
+func paused_toggle(is_paused: bool):
 	if is_paused:
 		show()
 	else:

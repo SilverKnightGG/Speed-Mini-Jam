@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dyhp3dmdx13gm" path="res://Scenes/Entities/voidfire_wall.tscn" id="3_70rqm"]
 
 [node name="Stage" type="Node2D"]
+process_mode = 1
 script = ExtResource("1_xgxar")
 
 [node name="Background0" parent="." instance=ExtResource("2_70rqm")]
