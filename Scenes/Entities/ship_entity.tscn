@@ -60,9 +60,10 @@ scale_source = NodePath("MovingNodes")
 [node name="Mover" type="Area2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("2_5cpm7")
+weight_factor = 2.0
 navigation = 1
-base_max_speed = 300.0
-base_acceleration = 150.0
+base_max_speed = 240.0
+base_acceleration = 240.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Mover"]
 unique_name_in_owner = true

@@ -75,4 +75,5 @@ func _on_fuel_consumption_timer_timeout():
 
 
 func set_phased_out(phased: bool):
+	print("phasing out ", str(phased))
 	set_collision_layer_value(0, phased)

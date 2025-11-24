@@ -1,4 +1,4 @@
-class_name VoidfireWall extends Area2D
+class_name VoidfireWall extends Node2D
 
 
 func _ready():

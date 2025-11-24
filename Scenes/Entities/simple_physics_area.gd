@@ -6,10 +6,10 @@ const DEFAULT_WEIGHT_FACTOR := 1.0
 const DEFAULT_SHUNT_WEIGHT := 10.0
 const RADIUS_TO_WEIGHT := 1.6
 const MAX_EXTERNAL_VELOCITIES_LENGTH := 200.0
-const MAX_SHUNT_VELOCITY_LENGTH := 120.0
+const MAX_SHUNT_VELOCITY_LENGTH := 1200.0
 const SHUNT_DURING_KNOCKBACK_FACTOR := 0.5
 const EXTERNAL_ACCELERATION_FACTOR := 80.0
-const WEIGHT_FACTOR_CURVE := [2.0, 1.7, 1.445, 1.228, 1.0, 0.772, 0.555, 0.3, 0.1]
+const WEIGHT_FACTOR_CURVE := [2.0, 1.7, 1.445, 1.228, 1.0, 0.772, 0.555, 0.3, 0.2]
 const KNOCKBACK_EXPONENT := 2.0
 const DEFAULT_RADIUS := 200.0 # 200 for testing
 const USE_DEFAULT_VALUE := Vector2(-9999.999, -9999.999)
@@ -26,7 +26,7 @@ const FORCE_VALUE_DEFAULTS = {
 
 ## Class for tracking shunt source data so it doesn't have to be re-calculated per-frame.
 class ShuntSourceProfile:
-	var area: MovementArea
+	var area: Area2D
 	var shunt_power: float
 
 class ExternalForce:
@@ -149,15 +149,16 @@ func _movement(delta):
 			
 			
 			var new_movement_velocity: Vector2 = Vector2(velocity_increase).limit_length(max_speed)
-			current_velocity = new_movement_velocity + current_external_velocity
+			current_velocity = new_movement_velocity + current_external_velocity + current_shunt_velocity
 	
-	global_position += (current_velocity + current_shunt_velocity) * delta
+	if abs(current_shunt_velocity) > Vector2.ZERO:
+		prints("current_shunt_velocity", str(current_shunt_velocity))
+	global_position += current_velocity * delta
 
 
 func _calculate_shunt(delta) -> Vector2:
 	if stored_shunt_sources.size() < 1:
 		return Vector2.ZERO
-	print("calculating shunt")
 	
 	var incoming_shunt_velocity := Vector2.ZERO
 	
@@ -165,10 +166,14 @@ func _calculate_shunt(delta) -> Vector2:
 		if !is_instance_valid(source.area): continue
 		
 		# TODO This part needs to change for the static ones
-		var direction: Vector2 = global_position - source.area.global_position
+		var direction: Vector2 = global_position - source.area.get_perpendicular_offset(global_position)
+		#prints("direction", str(direction))
 		var distance: float = direction.length()
+		#prints("distance", str(distance))
 		var shunt_power: float = source.shunt_power
+		#prints("shunt_power", str(source.shunt_power))
 		var overlap: float = shunt_power - distance
+		#prints("overlap", str(overlap))
 		if overlap <= 0.0:
 			continue
 		
@@ -178,7 +183,7 @@ func _calculate_shunt(delta) -> Vector2:
 		
 		incoming_shunt_velocity += direction.normalized() * distance_factor * source.area.shunt_weight
 	
-	return incoming_shunt_velocity * delta
+	return incoming_shunt_velocity #* delta
 
 
 func _increase_in_direction(input_velocity: Vector2, direction_vector2: Vector2, acceleration_rate: float) -> Vector2:
@@ -234,41 +239,44 @@ func _on_receive_new_trajectory(new_trajectory: Vector2, force_changes: Dictiona
 	target_node2d = null
 
 
+## I'm not convinced this actually "NEEDS" to be here...
+func get_perpendicular_offset(origin: Vector2, axis_y: bool = true) -> Vector2:
+	if axis_y:
+		return Vector2(origin.x, global_position.y)
+	else:
+		return Vector2(global_position.x, origin.y)
+
+
 func get_shunt_power() -> float:
-	return collision_shape.shape.radius + collision_shape.shape.radius
+	return collision_shape.shape.radius
 
 
-func _add_shunt_source(area: MovementArea):
+func _add_shunt_source(area: Area2D):
 	if not area.tree_exiting.is_connected(_on_area_tree_exiting):
 		area.tree_exiting.connect(_on_area_tree_exiting)
 	var profile := ShuntSourceProfile.new()
 	profile.area = area
-	profile.shunt_power = area.get_shunt_power()
+	profile.shunt_power = area.get_shunt_power() + get_shunt_power()
 	stored_shunt_sources[area.get_instance_id()] = profile
 
 
-func _remove_shunt_source(area: MovementArea):
+func _remove_shunt_source(area: Area2D):
 	stored_shunt_sources.erase(area.get_instance_id())
 
 
 func _on_area_entered(area: Area2D):
-	if not area is MovementArea: return
+	prints("area entered mover")
+	if not area is MovementArea and not area is ShuntBarrier: return
 	
-	_add_shunt_source(area as MovementArea)
+	_add_shunt_source(area as Area2D)
 
 
 func _on_area_exited(area: Area2D):
-	if area is MovementArea:
-		_remove_shunt_source(area as MovementArea)
-		return
-	# we just know it's a pickup, then
+	_remove_shunt_source(area as Area2D)
 	
-
 
 func _on_area_tree_exiting(area: Node):
-	if not area is MovementArea: return
-	
-	_remove_shunt_source(area as MovementArea)
+	_remove_shunt_source(area as Area2D)
 
 
 ## Wrapper for add_external_forces for things to not need to know about the internal class ExternalForce.
