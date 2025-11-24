@@ -1,4 +1,9 @@
-[gd_scene format=3 uid="uid://b782qq41uenrt"]
+[gd_scene load_steps=5 format=3 uid="uid://b782qq41uenrt"]
+
+[ext_resource type="Script" uid="uid://cn5esax3xi167" path="res://Scenes/GUI Scenes/splash.gd" id="1_4owia"]
+[ext_resource type="Texture2D" uid="uid://ojoqbr545mo5" path="res://Assets/Graphics/Voidfire Logo/Voidfire transparent.png" id="1_472m3"]
+[ext_resource type="Texture2D" uid="uid://beohcrq1wlppu" path="res://Assets/Graphics/Voidfire Logo/start.png" id="2_4owia"]
+[ext_resource type="Texture2D" uid="uid://cvohpsffifwh3" path="res://Assets/Graphics/Voidfire Logo/click or enter.png" id="3_j2emr"]
 
 [node name="Splash" type="CenterContainer"]
 anchors_preset = 15
@@ -6,7 +11,42 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_4owia")
 
-[node name="Label" type="Label" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
-text = "Click to Play"
+theme_override_constants/separation = 96
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="Title" type="TextureRect" parent="VBoxContainer"]
+custom_minimum_size = Vector2(581, 78)
+layout_mode = 2
+texture = ExtResource("1_472m3")
+expand_mode = 1
+
+[node name="Start" type="TextureRect" parent="VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(114, 26)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("2_4owia")
+expand_mode = 1
+
+[node name="ClickOrEnter" type="TextureRect" parent="VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(464, 26)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("3_j2emr")
+expand_mode = 1
+
+[node name="FlashTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.75
+
+[connection signal="timeout" from="FlashTimer" to="." method="_on_flash_timer_timeout"]

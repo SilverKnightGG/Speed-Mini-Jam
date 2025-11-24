@@ -1,6 +1,33 @@
-[gd_scene load_steps=2 format=3 uid="uid://ds5q1jnbgrro"]
+[gd_scene load_steps=5 format=3 uid="uid://ds5q1jnbgrro"]
 
 [ext_resource type="Script" uid="uid://ba787w23xk60v" path="res://Scenes/main.gd" id="1_jjgbg"]
+[ext_resource type="PackedScene" uid="uid://b782qq41uenrt" path="res://Scenes/GUI Scenes/splash.tscn" id="2_bo1nx"]
+[ext_resource type="Script" uid="uid://c5fql1jydfkiu" path="res://Scenes/paused_game.gd" id="3_8gbba"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_8gbba"]
+font_size = 64
+font_color = Color(1, 1, 0.772549, 1)
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 0.733333)
+shadow_offset = Vector2(2, 2)
 
 [node name="Main" type="Node"]
 script = ExtResource("1_jjgbg")
+
+[node name="Splash" parent="." instance=ExtResource("2_bo1nx")]
+unique_name_in_owner = true
+
+[node name="PausedGame" type="CenterContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_8gbba")
+
+[node name="Label" type="Label" parent="PausedGame"]
+layout_mode = 2
+text = "PAUSED"
+label_settings = SubResource("LabelSettings_8gbba")
