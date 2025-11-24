@@ -1,7 +1,7 @@
 class_name SpinningAnimatedSprite extends AnimatedSprite2D
 
-const MIN_ROTATION: float = -16.0
-const MAX_ROTATION: float = 16.0
+const MIN_ROTATION: float = -8.0
+const MAX_ROTATION: float = 8.0
 
 const ANIMATIONS: Array[String] = ["spin0", "spin1", "spin2", "spin3"]
 

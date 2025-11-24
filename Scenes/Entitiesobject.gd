@@ -2,7 +2,7 @@ class_name Entity extends Node2D
 
 
 @onready var mover: MovementArea = %Mover
-@onready var sprite: Sprite2D = %MoverSprite
+@onready var sprite: Node2D = %MoverSprite
 @onready var moving_nodes: MovingNodes = %MovingNodes
 
 

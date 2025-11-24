@@ -369,6 +369,7 @@ func _on_notify_onscreen():
 
 
 func _process(_delta):
+	_check_left_removal()
 	if not Engine.is_editor_hint(): return
 	if not is_node_ready(): return
 	
@@ -385,3 +386,8 @@ func set_state(new_state : State = State._FLIP_):
 		return
 	
 	state = new_state
+
+
+func _check_left_removal():
+	if global_position.x < Registry.ship.mover.global_position.x - Registry.CLEAR_DISTANCE:
+		owner.queue_free()

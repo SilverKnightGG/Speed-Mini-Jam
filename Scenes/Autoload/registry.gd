@@ -1,6 +1,7 @@
 extends Node
 
 # autload
+const CLEAR_DISTANCE: float = 800.0
 
 enum ElementType {ETERNEON, MALNEON, VOLANTEON, ALL}
 

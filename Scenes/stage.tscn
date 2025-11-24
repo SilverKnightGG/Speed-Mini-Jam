@@ -26,9 +26,11 @@ position = Vector2(2048, 0)
 
 [node name="EntitySpawnTimer" type="Timer" parent="."]
 unique_name_in_owner = true
+autostart = true
 
 [node name="PickupSpawnTimer" type="Timer" parent="."]
 unique_name_in_owner = true
+autostart = true
 
 [connection signal="timeout" from="EntitySpawnTimer" to="." method="_on_entity_spawn_timer_timeout"]
 [connection signal="timeout" from="PickupSpawnTimer" to="." method="_on_pickup_spawn_timer_timeout"]

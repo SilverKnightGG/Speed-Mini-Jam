@@ -277,6 +277,7 @@ unique_name_in_owner = true
 script = ExtResource("3_o61a6")
 
 [node name="MoverSprite" type="AnimatedSprite2D" parent="MovingNodes"]
+unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_oypo3")
 animation = &"spin3"
 script = ExtResource("6_qo38l")

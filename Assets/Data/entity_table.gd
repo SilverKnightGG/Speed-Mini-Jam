@@ -3,7 +3,8 @@ extends Node
 # autoload
 
 const WEIGHTED_UIDS: Dictionary[String, int] = {
-	
+	"uid://ccf636mp186jm": 500,
+	"uid://fi80wq3j8js2": 800,
 	}
 
 var weighted_list: Dictionary[PackedScene, int] = {}
@@ -27,7 +28,9 @@ func get_entity(progress: float) -> Entity:
 	
 	for key in weighted_list:
 		var weight_difference: float = Stage.PROGRESS_ZENITH - weighted_list[key]
-		progressed_weighted_list[key] = clampi(ceili(Stage.PROGRESS_ZENITH / clampf((progress_difference * weight_difference), 1.0, INF)), 1, INF) # no zero allowed
+		var progress_weight_factor: float = clampf((progress_difference * weight_difference), 1.0, INF)
+		var weight_adjustment: float = Stage.PROGRESS_ZENITH / progress_weight_factor
+		progressed_weighted_list[key] = clampi(ceili(weight_adjustment), 1, 99999) # no zero allowed
 		total_weight += progressed_weighted_list[key]
 	
 	var accumulated: float = 0.0
@@ -35,7 +38,8 @@ func get_entity(progress: float) -> Entity:
 	
 	for packedscene in progressed_weighted_list:
 		accumulated += progressed_weighted_list[packedscene]
-		if random < accumulated:
-			return packedscene.instantiate()
+		if accumulated > random:
+			var new_entity: Entity = packedscene.instantiate()
+			return new_entity
 	
 	return null
