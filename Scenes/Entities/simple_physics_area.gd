@@ -253,7 +253,7 @@ func get_shunt_power() -> float:
 
 func _add_shunt_source(area: Area2D):
 	if not area.tree_exiting.is_connected(_on_area_tree_exiting):
-		area.tree_exiting.connect(_on_area_tree_exiting)
+		area.tree_exiting.connect(_on_area_tree_exiting.bind(area))
 	var profile := ShuntSourceProfile.new()
 	profile.area = area
 	profile.shunt_power = area.get_shunt_power() + get_shunt_power()

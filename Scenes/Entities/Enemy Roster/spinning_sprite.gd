@@ -25,6 +25,7 @@ func _on_choose_sprite():
 	var row: int = SHEET_FRAME_XorY.pick_random()
 	var column: int = SHEET_FRAME_XorY.pick_random()
 	
+	set_texture(texture_to_use)
 	set_region_rect(Rect2(Vector2(size * column, size * row), Vector2(size, size)))
 
 
