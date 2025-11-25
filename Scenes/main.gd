@@ -3,6 +3,7 @@ extends Node
 
 const STAGE_SCENE: PackedScene = preload("uid://ctwu80l76nigy")
 const GAME_OVER_TIME: float = 2.0
+const GAME_OVER_FADE_IN_FACTOR: float = 0.33
 const CREDITS_TIME: float = 4.0
 
 var current_stage: Stage = null
@@ -51,16 +52,19 @@ func _enter_stage():
 	if current_stage == null:
 		current_stage = STAGE_SCENE.instantiate()
 		add_child(current_stage)
+		%StageAudioStreamPlayer.play()
 
 
 func _leave_stage():
 	if not state == State.PAUSED:
 		if is_instance_valid(current_stage):
 			current_stage.queue_free()
+			%StageAudioStreamPlayer.stop()
 
 
 func _enter_splash():
 	splash.show()
+	%MainAudioStreamPlayer.play()
 
 
 func _enter_paused():
@@ -75,10 +79,12 @@ func _leave_paused():
 
 func _leave_splash():
 	splash.hide()
+	%MainAudioStreamPlayer.stop()
 
 
 func _enter_credits():
 	%GameOverTimer.start(CREDITS_TIME)
+	%Credits.show()
 
 
 # Academic...should never enter, because scene is reloaded
@@ -87,11 +93,14 @@ func _leave_credits():
 
 
 func _enter_game_over():
+	is_game_over = true
 	%GameOverTimer.start(GAME_OVER_TIME)
+	%MainAudioStreamPlayer.play()
 
 
 func _leave_game_over():
 	continue_credits = false
+	%GameOver.hide()
 
 
 #endregion State
@@ -117,18 +126,24 @@ func _input(event):
 func _ready():
 	Registry.main = self
 	Registry.death_vignette = %DeathVignette
+	state = State.SPLASH
 
 
 func _process(delta):
 	if not is_game_over:
 		return
 	
-	%GameOver.modulate.a = clampf(%GameOver.modulate.a + delta, 0.0, 1.0)
+	%GameOver.modulate.a = clampf(%GameOver.modulate.a + delta * GAME_OVER_FADE_IN_FACTOR, 0.0, 1.0)
 
 
 func game_over():
-	is_game_over = true
+	state = State.GAME_OVER
 
 
 func _on_game_over_timer_timeout():
+	print("game over timer timeout")
 	continue_credits = true
+	if state == State.CREDITS:
+		%RestartIndicator.show()
+	if state == State.GAME_OVER:
+		%ContinueToCreditsIndicator.show()

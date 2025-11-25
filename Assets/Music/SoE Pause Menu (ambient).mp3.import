@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://5plsi5x3pp4w"
+path="res://.godot/imported/SoE Pause Menu (ambient).mp3-5f646b5c497d34203050e799988d4796.mp3str"
+
+[deps]
+
+source_file="res://Assets/Music/SoE Pause Menu (ambient).mp3"
+dest_files=["res://.godot/imported/SoE Pause Menu (ambient).mp3-5f646b5c497d34203050e799988d4796.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

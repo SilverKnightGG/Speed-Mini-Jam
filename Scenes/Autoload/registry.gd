@@ -8,6 +8,9 @@ enum ElementType {ETERNEON, MALNEON, VOLANTEON, ALL}
 var main: Node = null
 var ship: ShipEntity = null
 var death_vignette: TextureRect = null
+var is_cooked: bool = false
+var cooked_amount: float = 1.7
+var cookoff_speed: float = 6.0
 
 var depleted: bool = false
 var fuel_amounts: Dictionary[ElementType, int] = {
@@ -18,6 +21,8 @@ var fuel_amounts: Dictionary[ElementType, int] = {
 		set(new_fuel_amounts):
 			fuel_amounts = new_fuel_amounts
 			depleted = true
+			if not is_instance_valid(ship):
+				return
 			for amount in fuel_amounts.values():
 				if amount > 0:
 					depleted = false
@@ -28,12 +33,13 @@ var fuel_amounts: Dictionary[ElementType, int] = {
 var burning_fuel_type: ElementType = ElementType.ETERNEON:
 	set(new_type):
 		burning_fuel_type = new_type
-		
+		if not is_instance_valid(ship):
+			return
 		ship.mover.set_max_speed(burning_fuel_type)
 
 
 func use_fuel():
-	fuel_amounts[burning_fuel_type] = clampi(fuel_amounts[burning_fuel_type] - 1, 0, INF)
+	fuel_amounts[burning_fuel_type] = clampi(fuel_amounts[burning_fuel_type] - 1, 0, 9999)
 	if fuel_amounts[burning_fuel_type] < 1:
 		ship.mover._toggle_fuel(ShipMover.TOGGLE_UP)
 
@@ -66,4 +72,12 @@ func restart():
 	}
 	depleted = false
 	burning_fuel_type = ElementType.ETERNEON
+	is_cooked = false
 	main.get_tree().reload_current_scene()
+
+
+func _process(delta):
+	if is_cooked:
+		cooked_amount += delta * cookoff_speed
+		cookoff_speed += delta
+		death_vignette.set_instance_shader_parameter("radius", cooked_amount)

@@ -10,10 +10,6 @@ const COOKING_RATIO: float = 390.0
 var speed: float = 50.0
 
 var cooking: bool = false
-var is_cooked: bool = false
-var cooked_amount: float = 1.7
-var cookoff_speed: float = 6.0
-
 
 
 func _ready():
@@ -27,10 +23,7 @@ func _process(delta):
 	position.x += speed * delta
 	var ship_position_x: float = Registry.ship.mover.global_position.x
 	
-	if is_cooked:
-		cooked_amount += delta * cookoff_speed
-		cookoff_speed += delta
-		Registry.death_vignette.set_instance_shader_parameter("radius", cooked_amount)
+	if Registry.is_cooked:
 		return
 	
 	if cooking:
@@ -46,12 +39,12 @@ func _on_warning_area_area_entered(area):
 
 
 func _on_death_area_area_entered(area):
-	is_cooked = true
+	Registry.is_cooked = true
 	Registry.main.game_over()
 
 
 func _on_warning_area_area_exited(area):
-	if is_cooked:
+	if Registry.is_cooked:
 		return
 	cooking = false
 	var ship_position_x: float = Registry.ship.mover.global_position.x
