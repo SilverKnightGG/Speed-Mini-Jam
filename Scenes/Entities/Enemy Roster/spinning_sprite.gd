@@ -1,7 +1,7 @@
 class_name SpinningSprite extends Sprite2D
 
-const MIN_ROTATION: float = -16.0
-const MAX_ROTATION: float = 16.0
+const MIN_ROTATION: float = -8.0
+const MAX_ROTATION: float = 8.0
 const ROTATE_INCREMENT: float = TAU / 8.0
 const SHEET_FRAME_XorY: Array[int] = [0, 1, 2, 3]
 

@@ -151,8 +151,8 @@ func _movement(delta):
 			var new_movement_velocity: Vector2 = Vector2(velocity_increase).limit_length(max_speed)
 			current_velocity = new_movement_velocity + current_external_velocity + current_shunt_velocity
 	
-	if abs(current_shunt_velocity) > Vector2.ZERO:
-		prints("current_shunt_velocity", str(current_shunt_velocity))
+	#if abs(current_shunt_velocity) > Vector2.ZERO:
+		#prints("current_shunt_velocity", str(current_shunt_velocity))
 	global_position += current_velocity * delta
 
 
@@ -167,13 +167,9 @@ func _calculate_shunt(delta) -> Vector2:
 		
 		# TODO This part needs to change for the static ones
 		var direction: Vector2 = global_position - source.area.get_perpendicular_offset(global_position)
-		#prints("direction", str(direction))
 		var distance: float = direction.length()
-		#prints("distance", str(distance))
 		var shunt_power: float = source.shunt_power
-		#prints("shunt_power", str(source.shunt_power))
 		var overlap: float = shunt_power - distance
-		#prints("overlap", str(overlap))
 		if overlap <= 0.0:
 			continue
 		
@@ -265,7 +261,6 @@ func _remove_shunt_source(area: Area2D):
 
 
 func _on_area_entered(area: Area2D):
-	prints("area entered mover")
 	if not area is MovementArea and not area is ShuntBarrier: return
 	
 	_add_shunt_source(area as Area2D)

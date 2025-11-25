@@ -7,6 +7,7 @@ enum ElementType {ETERNEON, MALNEON, VOLANTEON, ALL}
 
 var main: Node = null
 var ship: ShipEntity = null
+var death_vignette: TextureRect = null
 
 var depleted: bool = false
 var fuel_amounts: Dictionary[ElementType, int] = {
@@ -55,3 +56,14 @@ func _on_ship_entered_death_area(_area):
 
 func out_of_fuel():
 	pass
+
+
+func restart():
+	fuel_amounts = {
+	ElementType.ETERNEON: 10,
+	ElementType.MALNEON: 10,
+	ElementType.VOLANTEON: 10
+	}
+	depleted = false
+	burning_fuel_type = ElementType.ETERNEON
+	main.get_tree().reload_current_scene()

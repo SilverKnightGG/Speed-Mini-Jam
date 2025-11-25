@@ -20,20 +20,24 @@ var fuel_amount: int = 1
 
 var type: Registry.ElementType:
 	set(new_type):
+		type = new_type
 		if not is_instance_valid(fuel_sprite):
 			return
 		
-		fuel_sprite.region_rect = TEXTURE_REGIONS[type]
+		fuel_sprite.set_region_rect(TEXTURE_REGIONS[type])
 
 
 func _ready():
 	if not fuel_sprite.region_enabled:
 		fuel_sprite.set_region_enabled(true)
 	
-	type = (Registry.ElementType.values().pick_random())
+	type = (Registry.ElementType.values().pick_random()) as int
 	# fast and dirty reroll to make ALL more rare to actually happen (so, it's a 6.25% chance)
+	#if type == Registry.ElementType.ALL:
+		#type = (Registry.ElementType.values().pick_random())
 	if type == Registry.ElementType.ALL:
-		type = (Registry.ElementType.values().pick_random())
+		fuel_sprite.set_instance_shader_parameter("all_colors", true);
+		fuel_sprite.get_child(0).show()
 	
 	fuel_amount = ceili(ease(randf(), FUEL_RANDOM_CURVE) * FUEL_AMOUNT_MAX)
 

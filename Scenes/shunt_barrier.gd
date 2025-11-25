@@ -51,6 +51,4 @@ func _remove_shunt_source(area: MovementArea):
 func _on_area_entered(area: Area2D):
 	if not area is MovementArea: return
 	
-	prints("collision detected")
-	
 	_add_shunt_source(area as MovementArea)

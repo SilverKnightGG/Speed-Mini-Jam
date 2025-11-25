@@ -24,13 +24,11 @@ func _process(delta):
 
 
 func _on_entity_spawn_timer_timeout():
-	prints("entity spawner timeout")
 	entity_spawn_timer.start(ease(randf_range(MIN_ENTITY_SPAWN_TIME, MAX_ENTITY_SPAWN_TIME), ENTITY_SPAWN_CURVE))
 	_spawn_entity()
 
 
 func _on_pickup_spawn_timer_timeout():
-	prints("pickup spawner timeout")
 	pickup_spawn_timer.start(ease(randf_range(MIN_PICKUP_SPAWN_TIME, MAX_PICKUP_SPAWN_TIME), PICKUP_SPAWN_CURVE))
 	_spawn_pickup()
 
