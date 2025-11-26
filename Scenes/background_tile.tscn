@@ -16,7 +16,7 @@ height = 4096
 fill_from = Vector2(1, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vuyue"]
-size = Vector2(1024, 512)
+size = Vector2(1024, 1935.42)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_i7pcg"]
 blend_mode = 1
@@ -125,22 +125,22 @@ texture = SubResource("GradientTexture2D_70rqm")
 script = ExtResource("1_85jdc")
 
 [node name="TopBound" type="Area2D" parent="."]
-position = Vector2(0, -1024)
+position = Vector2(0, -2040)
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_vkslf")
-weight_factor = 200.0
-shunt_power = 3.0
+weight_factor = 400.0
+shunt_power = 50.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TopBound"]
 unique_name_in_owner = true
-position = Vector2(0, -64)
+position = Vector2(0, 10.2891)
 shape = SubResource("RectangleShape2D_vuyue")
 
 [node name="BoundaryMask" type="Sprite2D" parent="TopBound"]
 clip_children = 2
 material = SubResource("CanvasItemMaterial_i7pcg")
-position = Vector2(0, -224)
+position = Vector2(0, 503)
 scale = Vector2(4, 4)
 texture = SubResource("GradientTexture2D_6ev4t")
 
@@ -149,20 +149,21 @@ material = SubResource("ShaderMaterial_dhx8t")
 texture = SubResource("GradientTexture2D_sokeb")
 
 [node name="BottomBound" type="Area2D" parent="."]
-position = Vector2(0, 1024)
+position = Vector2(0, 2053)
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_vkslf")
-weight_factor = 200.0
-shunt_power = 3.0
+weight_factor = 400.0
+shunt_power = 50.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BottomBound"]
+position = Vector2(0, -10.5781)
 shape = SubResource("RectangleShape2D_vuyue")
 
 [node name="BoundaryMask2" type="Sprite2D" parent="BottomBound"]
 clip_children = 2
 material = SubResource("CanvasItemMaterial_i7pcg")
-position = Vector2(0, 171)
+position = Vector2(0, -522)
 scale = Vector2(4, -4)
 texture = SubResource("GradientTexture2D_6ev4t")
 

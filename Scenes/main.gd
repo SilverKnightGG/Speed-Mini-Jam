@@ -121,6 +121,15 @@ func _input(event):
 			State.CREDITS:
 				if continue_credits:
 					Registry.restart()
+	
+	if event.is_action_released("ui_cancel"):
+		match state:
+			State.PAUSED:
+				Registry.restart()
+			State.SPLASH:
+				get_tree().quit()
+			State.CREDITS:
+				get_tree().quit()
 
 
 func _ready():

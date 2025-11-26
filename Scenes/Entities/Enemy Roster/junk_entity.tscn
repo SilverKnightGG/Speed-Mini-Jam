@@ -14,7 +14,10 @@ script = ExtResource("1_bhqus")
 [node name="Mover" type="Area2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("2_jh37d")
+weight_factor = 40.0
 navigation = 1
+base_max_speed = 0.0
+base_acceleration = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Mover"]
 unique_name_in_owner = true

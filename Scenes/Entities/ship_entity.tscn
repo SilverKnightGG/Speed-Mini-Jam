@@ -1,14 +1,15 @@
-[gd_scene load_steps=16 format=3 uid="uid://uh16to4u3v10"]
+[gd_scene load_steps=34 format=3 uid="uid://uh16to4u3v10"]
 
 [ext_resource type="Script" uid="uid://byna0dlam2tsv" path="res://Scenes/Entities/ship_entity.gd" id="1_5cpm7"]
 [ext_resource type="Script" uid="uid://cw575umgb5cxg" path="res://Scenes/Entities/ship_mover.gd" id="2_5cpm7"]
-[ext_resource type="Texture2D" uid="uid://ejf7qeub7usi" path="res://Assets/Graphics/Textures/Galleon.png" id="3_rif75"]
 [ext_resource type="Script" uid="uid://tnuibtauyqsa" path="res://Scenes/Entities/input_movement.gd" id="4_buhsh"]
+[ext_resource type="Texture2D" uid="uid://b7ir47qwhx5k6" path="res://Assets/Graphics/Textures/Airship blimp - v4 - full ship animation - sprite sheet 128x128.png" id="5_byr66"]
 [ext_resource type="Script" uid="uid://b74k3hljc2ftk" path="res://Scenes/Entities/moving_nodes.gd" id="5_rif75"]
 [ext_resource type="Shader" uid="uid://cipy7scuv1nkv" path="res://Assets/Graphics/Shaders/speed_lines.gdshader" id="6_byr66"]
+[ext_resource type="Script" uid="uid://dduihwo0yknpf" path="res://Scenes/Entities/mover_sprite.gd" id="6_sbkg2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eju28"]
-radius = 24.0
+radius = 32.0156
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5cpm7"]
 
@@ -22,6 +23,126 @@ gradient = SubResource("Gradient_5cpm7")
 width = 1024
 height = 768
 fill_from = Vector2(1, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sbkg2"]
+atlas = ExtResource("5_byr66")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_58g87"]
+atlas = ExtResource("5_byr66")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p5mvh"]
+atlas = ExtResource("5_byr66")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_noau8"]
+atlas = ExtResource("5_byr66")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lyuxo"]
+atlas = ExtResource("5_byr66")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_33112"]
+atlas = ExtResource("5_byr66")
+region = Rect2(128, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_384gm"]
+atlas = ExtResource("5_byr66")
+region = Rect2(256, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t0117"]
+atlas = ExtResource("5_byr66")
+region = Rect2(384, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q7c6r"]
+atlas = ExtResource("5_byr66")
+region = Rect2(0, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cbeso"]
+atlas = ExtResource("5_byr66")
+region = Rect2(128, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q5xrp"]
+atlas = ExtResource("5_byr66")
+region = Rect2(256, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_exvvc"]
+atlas = ExtResource("5_byr66")
+region = Rect2(384, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_by83x"]
+atlas = ExtResource("5_byr66")
+region = Rect2(0, 384, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ue0dc"]
+atlas = ExtResource("5_byr66")
+region = Rect2(128, 384, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eove6"]
+atlas = ExtResource("5_byr66")
+region = Rect2(256, 384, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ibb56"]
+atlas = ExtResource("5_byr66")
+region = Rect2(384, 384, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e0g17"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sbkg2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_58g87")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p5mvh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_noau8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lyuxo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_33112")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_384gm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t0117")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q7c6r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cbeso")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q5xrp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_exvvc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_by83x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ue0dc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eove6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ibb56")
+}],
+"loop": true,
+"name": &"flight",
+"speed": 5.0
+}]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_3ku8u"]
 
@@ -89,9 +210,11 @@ position = Vector2(1.49998, 1.50001)
 scale = Vector2(1.27051, 0.923177)
 texture = SubResource("GradientTexture2D_byr66")
 
-[node name="MoverSprite" type="Sprite2D" parent="MovingNodes"]
+[node name="MoverSprite" type="AnimatedSprite2D" parent="MovingNodes"]
 unique_name_in_owner = true
-texture = ExtResource("3_rif75")
+sprite_frames = SubResource("SpriteFrames_e0g17")
+animation = &"flight"
+script = ExtResource("6_sbkg2")
 
 [node name="Camera2D" type="Camera2D" parent="MovingNodes"]
 

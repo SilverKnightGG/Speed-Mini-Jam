@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://botokyfayq3wj"]
+
+[ext_resource type="Script" uid="uid://dpw8hcdfl5o5k" path="res://Scenes/GUI Scenes/menu_buttons.gd" id="1_yxlet"]
+
+[node name="VBoxContainer" type="VBoxContainer"]
+script = ExtResource("1_yxlet")
+
+[node name="Back" type="Button" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Back"
+
+[node name="Exit" type="Button" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Exit"
+
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]

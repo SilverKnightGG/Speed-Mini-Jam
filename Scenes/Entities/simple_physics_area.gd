@@ -1,5 +1,6 @@
 class_name MovementArea extends Area2D
 
+const SHUNT_FRAMES_RESET_TIME: float = 0.01667 * 1 # where 0.01667 is avg frame time at 60fps, and second number is number of frames
 const MIN_WEIGHT_FACTOR := 0.1
 const MAX_WEIGHT_FACTOR := 40.0
 const DEFAULT_WEIGHT_FACTOR := 1.0
@@ -9,7 +10,9 @@ const MAX_EXTERNAL_VELOCITIES_LENGTH := 200.0
 const MAX_SHUNT_VELOCITY_LENGTH := 1200.0
 const SHUNT_DURING_KNOCKBACK_FACTOR := 0.5
 const EXTERNAL_ACCELERATION_FACTOR := 80.0
-const WEIGHT_FACTOR_CURVE := [2.0, 1.7, 1.445, 1.228, 1.0, 0.772, 0.555, 0.3, 0.2]
+#const WEIGHT_FACTOR_CURVE2 := [2.0, 1.7, 1.445, 1.228, 1.0, 0.772, 0.555, 0.3, 0.2]
+const WEIGHT_FACTOR_CURVE := [0.2, 0.4, 0.655, 0.972, 1.3, 1.628, 1.945, 2.2, 2.65]
+#const WEIGHT_FACTOR_CURVE1 := [2.2, 3.3, 4.555, 5.772, 7.0, 8.228, 9.445, 10.7, 12.0]
 const KNOCKBACK_EXPONENT := 2.0
 const DEFAULT_RADIUS := 200.0 # 200 for testing
 const USE_DEFAULT_VALUE := Vector2(-9999.999, -9999.999)
@@ -34,9 +37,11 @@ class ExternalForce:
 	var velocity: Vector2
 	var target: Node2D
 
-var stored_shunt_sources: Dictionary[int, ShuntSourceProfile] = {}
+var stored_shunt_sources: Array[ShuntSourceProfile] = []
 var shunt_weight: float = DEFAULT_SHUNT_WEIGHT
 var current_velocity: Vector2 = Vector2.ZERO
+var shunted_velocity: Vector2 = Vector2.ZERO
+@onready var shunt_frames_time: float = SHUNT_FRAMES_RESET_TIME
 var external_forces: Array[ExternalForce] = []
 var desired_vector2: Vector2 = Vector2.ZERO
 var target_node2d: Node2D
@@ -97,7 +102,7 @@ signal offscreen(is_offscreen: bool)
 func _physics_process(delta):
 	if Engine.is_editor_hint(): return
 	if state == State.STOPPED: return
-	
+
 	_movement(delta)
 
 
@@ -114,7 +119,7 @@ func _movement(delta):
 		total_external_velocity += force.velocity
 	
 	var external_acceleration: float = clampf(total_external_velocity.length(), 0.0, EXTERNAL_ACCELERATION_FACTOR)
-	var current_shunt_velocity: Vector2 = _calculate_shunt(delta).limit_length(MAX_SHUNT_VELOCITY_LENGTH) if using_shunting else Vector2.ZERO
+	var current_shunt_velocity = _calculate_shunt(delta).limit_length(MAX_SHUNT_VELOCITY_LENGTH) if using_shunting else Vector2.ZERO
 	var current_external_velocity = _increase_toward_vector2(Vector2.ZERO, total_external_velocity, external_acceleration * delta).limit_length(MAX_EXTERNAL_VELOCITIES_LENGTH)
 	
 	match state:
@@ -146,14 +151,16 @@ func _movement(delta):
 				Navigation.UN_DRIVEN:
 					pass
 			
-			
-			
 			var new_movement_velocity: Vector2 = Vector2(velocity_increase).limit_length(max_speed)
-			current_velocity = new_movement_velocity + current_external_velocity + current_shunt_velocity
+			
+			current_velocity = current_external_velocity + new_movement_velocity + _damping_after_shunt(current_shunt_velocity)
 	
-	#if abs(current_shunt_velocity) > Vector2.ZERO:
-		#prints("current_shunt_velocity", str(current_shunt_velocity))
-	global_position += current_velocity * delta
+	global_position += (current_velocity) * delta
+
+
+func _damping_after_shunt(input_velocity: Vector2) -> Vector2:
+	input_velocity *= 0.5 # temporary
+	return input_velocity
 
 
 func _calculate_shunt(delta) -> Vector2:
@@ -162,7 +169,7 @@ func _calculate_shunt(delta) -> Vector2:
 	
 	var incoming_shunt_velocity := Vector2.ZERO
 	
-	for source in stored_shunt_sources.values():
+	for source: ShuntSourceProfile in stored_shunt_sources:
 		if !is_instance_valid(source.area): continue
 		
 		# TODO This part needs to change for the static ones
@@ -253,11 +260,14 @@ func _add_shunt_source(area: Area2D):
 	var profile := ShuntSourceProfile.new()
 	profile.area = area
 	profile.shunt_power = area.get_shunt_power() + get_shunt_power()
-	stored_shunt_sources[area.get_instance_id()] = profile
+	stored_shunt_sources.append(profile)
 
 
 func _remove_shunt_source(area: Area2D):
-	stored_shunt_sources.erase(area.get_instance_id())
+	for source in stored_shunt_sources:
+		if source.area == area:
+			stored_shunt_sources.erase(source)
+			break
 
 
 func _on_area_entered(area: Area2D):
