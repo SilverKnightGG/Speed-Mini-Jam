@@ -5,6 +5,7 @@ extends Node
 const WEIGHTED_UIDS: Dictionary[String, int] = {
 	"uid://ccf636mp186jm": 500,
 	"uid://fi80wq3j8js2": 800,
+	"uid://3npqjbw1eov2": 200
 	}
 
 var weighted_list: Dictionary[PackedScene, int] = {}

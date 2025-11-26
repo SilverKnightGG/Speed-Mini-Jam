@@ -2,9 +2,14 @@ class_name ShipEntity extends Entity
 
 const FREE_THRESHOLD = 0.05
 const COLORS: Dictionary = {
-	Registry.ElementType.ETERNEON: Color.YELLOW,
-	Registry.ElementType.MALNEON: Color.MAGENTA,
-	Registry.ElementType.VOLANTEON: Color.CYAN
+	Registry.ElementType.ETERNEON: Color(Color.YELLOW, 0.2),
+	Registry.ElementType.MALNEON: Color(Color.MAGENTA, 0.2),
+	Registry.ElementType.VOLANTEON: Color(Color.CYAN, 0.2)
+	}
+const FADE_COLORS: Dictionary = {
+	Registry.ElementType.ETERNEON: Color(Color.YELLOW, 0.0),
+	Registry.ElementType.MALNEON: Color(Color.MAGENTA, 0.0),
+	Registry.ElementType.VOLANTEON: Color(Color.CYAN, 0.0)
 	}
 
 @export var frame_source: AnimatedSprite2D
@@ -36,7 +41,7 @@ func _on_update_current_animation():
 	current_atlas_texture = frame_source.sprite_frames.get_frame_texture(frame_source.animation, frame_source.get_frame())
 
 
-func _on_update_speed_references(current_speed: float, max_speed: float):
+func update_speed_references(current_speed: float, max_speed: float):
 	source_speed = current_speed
 	source_top_speed = max_speed
 
@@ -49,6 +54,7 @@ func _process(delta):
 	frames_timer -= delta
 	if frames_timer <= 0.0:
 		frames_timer += after_image_separation_time
+		update_speed_references(mover.current_velocity.length(), mover.max_speed)
 		_instantiate_new_after_image()
 	
 	
@@ -61,6 +67,7 @@ func _adjust_after_image_properties(delta: float):
 			_remove_last_after_image()
 			return # Last index should be the only one to ever return.
 		after_images[i].modulate = start_color.lerp(fade_to_color, 1.0 - (after_image_timers[i] / after_image_durations[i]))
+		
 		if use_speed_as_alpha:
 			after_images[i].modulate.a *= after_image_speeds[i] / pow(source_top_speed, speed_fade_exponent)
 			after_images[i].modulate.a -= speed_fade_threshold
@@ -77,13 +84,10 @@ func _remove_last_after_image():
 
 func _instantiate_new_after_image():
 	var new_after_image: Sprite2D = Sprite2D.new()
-	var stage = get_tree().get_first_node_in_group("game stage")
-	
-	if not is_instance_valid(stage): return
 	
 	new_after_image.texture = ImageTexture.create_from_image(current_atlas_texture.get_image())
-	stage.add_child(new_after_image)
-	new_after_image.global_position = global_position
+	Registry.stage.add_child(new_after_image)
+	new_after_image.global_position = moving_nodes.global_position
 	after_images.push_front(new_after_image)
 	after_image_timers.push_front(after_image_duration)
 	after_image_durations.push_front(after_image_duration)
@@ -103,11 +107,12 @@ func _on_start_drawing_after_images():
 
 func _on_fuel_changed(new_fuel: Registry.ElementType):
 	start_color = COLORS[new_fuel]
-	fade_to_color = Color(COLORS[new_fuel], 0.0)
+	fade_to_color = FADE_COLORS[new_fuel]
 
 
 func _ready():
 	super._ready()
 	Registry.ship = self
-	#frame_source.animation_changed.connect(_on_update_current_animation)
-	#_on_update_current_animation()
+	
+	frame_source.animation_changed.connect(_on_update_current_animation)
+	_on_update_current_animation()

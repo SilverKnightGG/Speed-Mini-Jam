@@ -174,9 +174,18 @@ width = 1024
 height = 1024
 fill_from = Vector2(1, 1)
 
-[node name="ShipEntity" type="Node2D" node_paths=PackedStringArray("scale_source")]
+[node name="ShipEntity" type="Node2D" node_paths=PackedStringArray("frame_source", "scale_source")]
 script = ExtResource("1_5cpm7")
+frame_source = NodePath("MovingNodes/MoverSprite")
 scale_source = NodePath("MovingNodes")
+effect_length_factor = 2.0
+number_of_after_images = 10
+start_color = Color(1, 1, 0, 0.2)
+speed_fade_exponent = 0.11
+speed_fade_threshold = 0.04
+drawing_after_image = true
+use_speed_as_alpha = true
+relative_z_index = -2
 
 [node name="Mover" type="Area2D" parent="."]
 unique_name_in_owner = true

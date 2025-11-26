@@ -12,12 +12,6 @@ var speed: float = 50.0
 var cooking: bool = false
 
 
-func _ready():
-	%WarningArea.area_entered.connect(Registry._on_ship_entered_warning_area)
-	%DeathArea.area_entered.connect(Registry._on_ship_entered_death_area)
-
-
-
 func _process(delta):
 	speed += ACCELERATION
 	position.x += speed * delta

@@ -193,13 +193,13 @@ func _increase_in_direction(input_velocity: Vector2, direction_vector2: Vector2,
 	return input_velocity + (direction_vector2.normalized() * acceleration_rate)
 
 
-func _increase_toward_vector2(input_velocity: Vector2, target_vector2: Vector2, acceleration_rate: float) -> Vector2:
-	var delta_vector2: Vector2 = target_vector2 - input_velocity
+func _increase_toward_vector2(input_vector2: Vector2, target_vector2: Vector2, acceleration_rate: float) -> Vector2:
+	var delta_vector2: Vector2 = target_vector2 - global_position
 	
 	if delta_vector2.is_zero_approx():
-		return input_velocity
+		return input_vector2
 	
-	return input_velocity + (delta_vector2.normalized() * acceleration_rate)
+	return input_vector2 + (delta_vector2.normalized() * acceleration_rate)
 
 
 func _on_knockback_begin(new_knockback_velocity: Vector2):

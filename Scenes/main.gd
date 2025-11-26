@@ -53,6 +53,7 @@ func _enter_stage():
 		current_stage = STAGE_SCENE.instantiate()
 		add_child(current_stage)
 		%StageAudioStreamPlayer.play()
+	%StageHUD.show()
 
 
 func _leave_stage():
@@ -60,6 +61,7 @@ func _leave_stage():
 		if is_instance_valid(current_stage):
 			current_stage.queue_free()
 			%StageAudioStreamPlayer.stop()
+	%StageHUD.hide()
 
 
 func _enter_splash():

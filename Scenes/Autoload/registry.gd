@@ -5,9 +5,17 @@ const CLEAR_DISTANCE: float = 800.0
 
 enum ElementType {ETERNEON, MALNEON, VOLANTEON, ALL}
 
+const ELEMENT_COLORS: Dictionary[ElementType, Color] = {
+	ElementType.ETERNEON: Color.YELLOW,
+	ElementType.MALNEON: Color.MAGENTA,
+	ElementType.VOLANTEON: Color.CYAN
+	}
+
 var main: Node = null
 var ship: ShipEntity = null
 var death_vignette: TextureRect = null
+var stage: Node2D = null
+var fuel_display: Control = null
 var is_cooked: bool = false
 var cooked_amount: float = 1.7
 var cookoff_speed: float = 6.0
@@ -42,6 +50,9 @@ func use_fuel():
 	fuel_amounts[burning_fuel_type] = clampi(fuel_amounts[burning_fuel_type] - 1, 0, 9999)
 	if fuel_amounts[burning_fuel_type] < 1:
 		ship.mover._toggle_fuel(ShipMover.TOGGLE_UP)
+	
+	if is_instance_valid(fuel_display):
+		fuel_display.update_fuel(fuel_amounts.values())
 
 
 func add_fuel(type: ElementType, amount: int):
@@ -50,18 +61,30 @@ func add_fuel(type: ElementType, amount: int):
 			fuel_amounts[ftype] += amount
 	else:
 		fuel_amounts[type] += amount
-
-
-func _on_ship_entered_warning_area(_area):
-	pass
-
-
-func _on_ship_entered_death_area(_area):
-	pass
+	
+	if is_instance_valid(fuel_display):
+		fuel_display.update_fuel(fuel_amounts.values())
+	
+	if not ship.mover.state == MovementArea.State.MOVING:
+		if not ship.mover.state == MovementArea.State.KNOCKBACK:
+			ship.mover.state = MovementArea.State.MOVING
+		else:
+			ship.mover.last_state = MovementArea.State.MOVING # instead of idle
 
 
 func out_of_fuel():
-	pass
+	if not ship.mover.state == MovementArea.State.KNOCKBACK:
+		ship.mover.state = MovementArea.State.IDLE
+	else:
+		ship.mover.last_state = MovementArea.State.IDLE
+
+
+func set_new_burning_fuel_type(type: ElementType):
+	burning_fuel_type = type
+	if is_instance_valid(fuel_display):
+		fuel_display.burning(type)
+	ship.start_color = ELEMENT_COLORS[type]
+	ship.fade_to_color = Color(ELEMENT_COLORS[type], 0.0)
 
 
 func restart():

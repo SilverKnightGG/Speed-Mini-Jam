@@ -1,12 +1,12 @@
 class_name Stage extends Node2D
 
 const MIN_ENTITY_SPAWN_TIME: float = 0.25
-const MAX_ENTITY_SPAWN_TIME: float = 15.0
+const MAX_ENTITY_SPAWN_TIME: float = 10.0
 const ENTITY_SPAWN_CURVE: float = 3.8
 
 const MIN_PICKUP_SPAWN_TIME: float = 1.0
-const MAX_PICKUP_SPAWN_TIME: float = 19.0
-const PICKUP_SPAWN_CURVE: float = 4.3
+const MAX_PICKUP_SPAWN_TIME: float = 20.0
+const PICKUP_SPAWN_CURVE: float = 2.4
 
 const PROGRESS_ZENITH: float = 1000.0 # seconds (So, game considers this to be a pivotal point, beyond which things begine getting much harder)
 const BASE_ALLOWED_X_OFFSET: float = 1000.0
@@ -53,3 +53,7 @@ func _spawn_pickup():
 		)
 	
 	add_child(new_fuel_pickup)
+
+
+func _ready():
+	Registry.stage = self

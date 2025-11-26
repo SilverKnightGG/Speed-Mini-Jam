@@ -21,6 +21,10 @@ position = Vector2(1024, 0)
 position = Vector2(2048, 0)
 
 [node name="ShipEntity" parent="." instance=ExtResource("2_plxqo")]
+effect_length_factor = 1.0
+speed_fade_exponent = 0.95
+speed_fade_threshold = 0.05
+relative_z_index = 0
 
 [node name="VoidfireWall" parent="." instance=ExtResource("3_70rqm")]
 
